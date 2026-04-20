@@ -17,7 +17,7 @@ A Claude Code skill that generates branded Platinumlist HTML presentations (16:9
 Clone into the standard Claude Code skills folder:
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/pl-deck.git ~/.claude/skills/pl-deck
+git clone https://github.com/tahagulbadan52/pl-deck.git ~/.claude/skills/pl-deck
 ```
 
 That's it. Next time you open Claude Code, `/pl-deck` is available.

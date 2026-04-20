@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # pl-deck skill installer
-# Usage: curl -fsSL https://raw.githubusercontent.com/YOUR-USERNAME/pl-deck/main/install.sh | bash
+# Usage: curl -fsSL https://raw.githubusercontent.com/tahagulbadan52/pl-deck/main/install.sh | bash
 set -e
 
 SKILL_DIR="$HOME/.claude/skills/pl-deck"
-REPO_URL="${PL_DECK_REPO:-https://github.com/YOUR-USERNAME/pl-deck.git}"
+REPO_URL="${PL_DECK_REPO:-https://github.com/tahagulbadan52/pl-deck.git}"
 
 echo "→ Installing pl-deck skill to $SKILL_DIR"
 
