@@ -128,36 +128,73 @@ Wait for user approval of the structure before generating.
 
 **Minimum font size: 14px anywhere on the slide. Body text minimum: 18px.**
 
-**Color Themes:**
+**Color Palette — Official Platinumlist System (reviewed by design team):**
 
-Two themes, applied via CSS class on each slide container:
+These are the ONLY colors allowed in any Platinumlist deck. Use exact hex values — no tints, no variants, no other colors.
 
-| Token | Purple/Cyan `.theme-purple` | Dark/Green `.theme-dark` |
-|-------|---------------------------|------------------------|
-| `--bg` | `#1a0533` | `#1a1a2e` |
-| `--accent-primary` | `#79E2FF` (cyan) | `#B8FF00` (lime) |
-| `--accent-secondary` | `#7B2FF2` (purple) | `#79E2FF` (cyan) |
-| `--card-bg` | `#79E2FF` | `#B8FF00` |
-| `--card-text` | `#1a0533` | `#1a1a2e` |
-| `--text` | `#ffffff` | `#ffffff` |
+| Name | Hex | Pantone | Use |
+|------|-----|---------|-----|
+| **Platinum Haze** | `#7E05E8` | Pantone 266 C | Backgrounds + logo only (NOT text) |
+| **Platinum Monday** | `#79E2FF` | Pantone 2197 C | Backgrounds + logo only (NOT text) |
+| **Platinum Day** | `#C7F88A` | Pantone 372 C | Backgrounds ONLY (NOT text, NOT logo) |
+| **Deep Platinum** | `#3C0071` | Pantone 2685 C | Backgrounds + text |
+| **Platinum Suede** | `#00A5D3` | Pantone 312 C | **Text only** (NOT backgrounds) |
+| **Platinum Sabbath** | `#221327` | Pantone 5255 C | Backgrounds + text |
+| **White** | `#FFFFFF` | — | Text only |
 
-**Theme auto-selection:**
-- **Purple/Cyan** — Cover slides, services/features, platform overview, CTA, any "selling" slide
-- **Dark/Green** — Data slides, campaign performance, metrics, charts, any "proving" slide
+**Hard rules (non-negotiable, from design team review):**
+
+1. **Cyan NEVER lives with Haze Purple on the same slide.** If a slide has Platinum Monday anywhere (bg, card, text, icon), it CANNOT have Platinum Haze anywhere, and vice versa. Sabbath (near-black) is NOT purple for this rule — it's treated as dark neutral.
+2. **Platinum Day (lime) is backgrounds ONLY.** Never use lime as text color.
+3. **Platinum Monday (cyan) and Platinum Haze (purple) are backgrounds + logo ONLY.** Never as body text. Can be used in large hero numbers / headlines ONLY if contrast is safe.
+4. **Platinum Suede is text ONLY.** Never as a background.
+5. **Primary colors never combine with their darker siblings.** No Haze on Deep Platinum, no Monday on Suede. Too little contrast.
+6. **Green on Purple is BANNED.** Lime text/blocks on Haze background = do not ship.
+
+**Approved on-slide combinations** (pick ONE per slide):
+
+| Theme name | Background | Text | Accent / cards |
+|------------|------------|------|----------------|
+| `.theme-haze` | Haze `#7E05E8` | White | Lime `#C7F88A` (accent), Sabbath `#221327` (cards). **No cyan.** |
+| `.theme-monday` | Monday `#79E2FF` | Deep Platinum `#3C0071` or Sabbath `#221327` | Sabbath cards, Deep Platinum hero numbers. **No Haze.** |
+| `.theme-sabbath` | Sabbath `#221327` | White | Monday cyan `#79E2FF` OR Lime `#C7F88A` (pick one per slide). "Blue on Dark Purple for the atmosphere" — allowed because Sabbath reads as near-black. |
+| `.theme-day` | Day `#C7F88A` | Haze `#7E05E8` (the only "purple on green" combo allowed) | Sabbath for dark contrast. Use sparingly — accent slide only. |
+| `.theme-deep` | Deep Platinum `#3C0071` | White | Lime accents. **No cyan, no Haze** (primary-on-darker rule). |
+
+**Theme auto-selection for deck type:**
+- **Cover / CTA / pitch hook slides** → `.theme-haze` or `.theme-monday` (big primary-color statement)
+- **Data / metrics / chart slides** → `.theme-sabbath` (dark bg, cyan or lime data pops)
+- **Accent / punchline slide** → `.theme-day` (one per deck max — "Purple on Green" quote slide)
+- **Section dividers** → `.theme-deep` (deep purple statement)
 
 **CSS Custom Properties:**
 ```css
 :root {
-  --bg-purple: #1a0533;
-  --cyan: #79E2FF;
-  --purple: #7B2FF2;
-  --bg-dark: #1a1a2e;
-  --lime: #B8FF00;
-  --text-white: #ffffff;
+  /* Official Platinumlist palette */
+  --haze: #7E05E8;          /* Platinum Haze — bg/logo only */
+  --monday: #79E2FF;        /* Platinum Monday cyan — bg/logo only */
+  --day: #C7F88A;           /* Platinum Day lime — bg only */
+  --deep: #3C0071;          /* Deep Platinum — bg + text */
+  --suede: #00A5D3;         /* Platinum Suede — text only */
+  --sabbath: #221327;       /* Platinum Sabbath — bg + text */
+  --white: #FFFFFF;
+  /* Structural */
   --card-radius: 16px;
   --slide-padding: 60px;
 }
+/* Theme classes set --bg / --text / --accent / --card-bg / --card-text */
+.theme-haze    { --bg: var(--haze);    --text: var(--white); --accent: var(--day);     --card-bg: var(--sabbath); --card-text: var(--white); }
+.theme-monday  { --bg: var(--monday);  --text: var(--deep);  --accent: var(--deep);    --card-bg: var(--sabbath); --card-text: var(--white); }
+.theme-sabbath { --bg: var(--sabbath); --text: var(--white); --accent: var(--monday);  --card-bg: var(--monday);  --card-text: var(--sabbath); }
+.theme-day     { --bg: var(--day);     --text: var(--haze);  --accent: var(--sabbath); --card-bg: var(--sabbath); --card-text: var(--day); }
+.theme-deep    { --bg: var(--deep);    --text: var(--white); --accent: var(--day);     --card-bg: var(--sabbath); --card-text: var(--day); }
 ```
+
+**Linter check before shipping any deck:** grep every slide for forbidden combos:
+- Slide contains `--haze` AND `--monday` = FAIL (cyan + purple rule)
+- Slide uses `color: var(--day)` on text = FAIL (lime is bg-only)
+- Slide uses `background: var(--suede)` = FAIL (Suede is text-only)
+- `.theme-day` slide uses any accent other than Haze text + Sabbath cards = FAIL
 
 ### Layout Components
 
@@ -326,11 +363,13 @@ Wrapper should always center the scaled container so small viewports don't feel 
 ```
 
 **Card types:**
-- `.card-cyan` — Background `#79E2FF`, text `#1a0533`, border-radius 16px, padding 24px
-- `.card-purple` — Background `#7B2FF2`, text white, border-radius 16px, padding 24px
-- `.card-lime` — Background `#B8FF00`, text `#1a1a2e`, border-radius 16px, padding 24px
-- `.card-bordered-lime` — Border 2px solid `#B8FF00`, transparent bg, white text, border-radius 16px
-- `.card-bordered-cyan` — Border 2px solid `#79E2FF`, transparent bg, white text, border-radius 16px
+- `.card-monday` — Background `#79E2FF` (Platinum Monday cyan), text `#221327` (Sabbath), 16px radius, 24px padding. **Only on theme-sabbath slides.**
+- `.card-day` — Background `#C7F88A` (Platinum Day lime), text `#221327` (Sabbath), 16px radius. **Only on theme-sabbath or theme-haze slides.**
+- `.card-sabbath` — Background `#221327`, text white. Universal — use on any theme.
+- `.card-deep` — Background `#3C0071` (Deep Platinum), text white. Use on theme-haze or theme-day.
+- `.card-haze` — Background `#7E05E8`, text white. **Only on theme-day or theme-sabbath slides** (not on theme-monday — cyan + purple banned).
+- `.card-bordered-day` — Border 2px solid `#C7F88A`, transparent bg, white text.
+- `.card-bordered-monday` — Border 2px solid `#79E2FF`, transparent bg, white text. **Not on theme-haze.**
 
 **Split layout:**
 Left side (60%) = headline + description. Right side (40%) = stacked stat cards.
@@ -369,8 +408,10 @@ Read these SVG files and inline them directly in the HTML.
 Load from CDN: `https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js`
 
 **Chart color palette:**
-- Purple theme charts: `#79E2FF`, `#B8FF00`, `#7B2FF2`, `#FF6B6B`, `#FFB347`
-- Dark theme charts: `#B8FF00`, `#79E2FF`, `#7B2FF2`, `#FF6B6B`, `#FFB347`
+- **Sabbath-theme charts:** `#79E2FF` (Monday), `#C7F88A` (Day), `#00A5D3` (Suede), `#FFFFFF` (white) — pick 2–3 per chart, never all.
+- **Haze-theme charts:** `#C7F88A` (Day lime), `#FFFFFF`, `#3C0071` (Deep Platinum). **No cyan** on Haze slides.
+- **Monday-theme charts:** `#3C0071` (Deep), `#221327` (Sabbath), `#00A5D3` (Suede). **No Haze.**
+- Do NOT mix Haze + Monday in any chart.
 
 **Chart rules:**
 - One chart per slide maximum
@@ -577,6 +618,9 @@ Want me to adjust any slides? The HTML is still editable — just tell me what t
 22. No orphan stats without context (always provide comparison or benchmark)
 23. No Comic Sans, Papyrus, or any font other than MD Nichrome + Inter
 24. No centered paragraph text — left-align body text, center only headlines and hero stats
+24b. **No eyebrow/kicker labels above headlines** (things like "— BY THE NUMBERS", "— ABOUT US", "— PLATFORM OVERVIEW" in small caps with a dash). They eat vertical real estate that should belong to the headline. The headline itself should carry the topic. Size up the headline to 72–96px instead. This is a HARD rule — design team feedback.
+24c. **Color palette: use ONLY the 7 official Platinumlist colors** (Haze, Monday, Day, Deep Platinum, Suede, Sabbath, White). No custom hex codes, no tints, no off-palette greys. See the Color Palette section for the full rules.
+24d. **Cyan + Haze purple never share a slide.** If Platinum Monday (`#79E2FF`) appears on a slide, Platinum Haze (`#7E05E8`) cannot appear on that same slide, and vice versa. Sabbath dark is not "purple" for this rule.
 
 ### Pricing Card Rules (MANDATORY for any slide with packages/tiers)
 
