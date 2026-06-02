@@ -1,0 +1,33 @@
+<!-- BLOCK: service-statpair
+     PURPOSE: A service slide — 2 icon-led hero stats + a deliverables list.
+     THEMES: theme-day (default), theme-monday
+     SLOTS:
+       {kicker} SERVICE 0X
+       {title} service name
+       {lead} description
+       {stats} 2 × { icon, num, label, ctx }
+       {list-title} e.g. "EDITORIAL SYSTEM" (with header icon)
+       {list} up to 5 items
+     DENSITY: two filled stat cards left, deliverables card right. -->
+<section class="slide theme-day">
+  <div class="head">
+    <div class="kicker">Service 06</div>
+    <h2 class="headline lg">Social Media Marketing</h2>
+    <p class="lead">We keep the conversation going — what's on, what's coming, and why it's worth going out.</p>
+  </div>
+  <div class="fill" style="display:flex; gap:36px; align-items:stretch;">
+    <div style="flex:1 1 0; display:flex; flex-direction:column; gap:20px;">
+      <div class="card card-haze feature" style="flex:1;"><div class="card-top"><span class="icon icon-lg" style="--icon:url('assets/phosphor-icons/SVGs/bold/chart-line-bold.svg')"></span></div><div><div class="num hero">+33%</div><div class="label">Organic social sessions</div></div><p class="ctx" style="margin:0;">Recovery 2 vs Recovery 1</p></div>
+      <div class="card card-haze feature" style="flex:1;"><div class="card-top"><span class="icon icon-lg" style="--icon:url('assets/phosphor-icons/SVGs/bold/trend-up-bold.svg')"></span></div><div><div class="num hero">+186%</div><div class="label">Organic social purchases</div></div><p class="ctx" style="margin:0;">Recovery 2 vs Recovery 1</p></div>
+    </div>
+    <div class="card card-outline" style="flex:1 1 0; justify-content:center;">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:8px;"><span class="icon icon-lg" style="--icon:url('assets/phosphor-icons/SVGs/bold/microphone-stage-bold.svg');color:var(--text);"></span><div class="subhead" style="color:var(--text);">Editorial system</div></div>
+      <ul class="checklist">
+        <li>Always-on editorial calendar</li>
+        <li>Reels &amp; Shorts native to each platform</li>
+        <li>Localised in EN + AR</li>
+        <li>Tagged into Platinumlist verticals</li>
+      </ul>
+    </div>
+  </div>
+</section>

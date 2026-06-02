@@ -1,0 +1,36 @@
+<!-- BLOCK: data-table
+     PURPOSE: Comparison table with column headers and ONE highlighted hero row.
+     THEMES: theme-haze (default), theme-sabbath
+     SLOTS:
+       {kicker} optional eyebrow
+       {sub-label} small bold line
+       {headline} the assertion
+       {lead} reading instruction
+       {columns} header cells
+       {rows} each { cells[] }; mark hero row class="row-hi"
+       {new-tag} optional floating "NEW" pill on the hero row
+       {foot} bottom caption
+     DENSITY: wrap in .table-wrap for the rounded outline. Hero row uses --accent. -->
+<section class="slide theme-haze">
+  <div class="head">
+    <div class="kicker">The Curve</div>
+    <div class="subhead">Four windows · one story</div>
+    <h2 class="headline lg">The curve — per-day across four windows</h2>
+    <p class="lead">% deltas in the recovery columns are vs Conflict Peak. The right-hand row tags Recovery 2 against pre-conflict — that's where the action is.</p>
+  </div>
+
+  <div class="fill" style="display:flex; align-items:center;">
+    <div class="table-wrap" style="width:100%;">
+      <table class="pl-table">
+        <thead><tr><th>Window</th><th>Dates</th><th>Sessions/d</th><th>Purchases/d</th><th>Revenue/d</th><th>Note</th></tr></thead>
+        <tbody>
+          <tr><td class="bold">Pre-Conflict</td><td>Feb 17 – Feb 27 · 11d</td><td>161,639</td><td>2,698</td><td>1.22M AED</td><td>Baseline before strikes</td></tr>
+          <tr><td class="bold">Conflict Peak</td><td>Feb 28 – Mar 16 · 17d</td><td>86,057 (−47%)</td><td>791 (−71%)</td><td>0.28M (−77%)</td><td>Demand paused, not lost</td></tr>
+          <tr><td class="bold">Recovery 1</td><td>Mar 17 – Apr 13 · 28d</td><td>112,337 (+31%)</td><td>1,580 (+100%)</td><td>0.52M (+81%)</td><td>Last update · Apr 15</td></tr>
+          <tr class="row-hi"><td class="bold">Recovery 2</td><td>Apr 14 – May 15 · 32d</td><td>159,288 (≈ Pre)</td><td>2,859 (+6% vs Pre)</td><td>1.28M (+5% vs Pre)</td><td>Above pre-conflict</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="foot">The market was growing right up to Feb 28 — sessions +31% YoY, revenue +15% / day. This was external shock, not decay. The shock has now fully discharged.</div>
+</section>

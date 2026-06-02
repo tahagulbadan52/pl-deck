@@ -16,6 +16,10 @@
 *-deck.pdf
 /tmp-preview/
 
+# Block-gallery QA artifacts (regenerate with scripts/build-gallery.sh)
+gallery.html
+scripts/_shots/
+
 # Node (for Puppeteer, installed to /tmp by the skill)
 node_modules/
 package-lock.json

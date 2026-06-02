@@ -1,0 +1,55 @@
+/* ============================================================================
+   PLATINUMLIST DECK TOKENS
+   Source of truth for all presentation blocks. Every block references these
+   variables — never a raw hex. When the upstream brand palette changes
+   (rustambiazarti/pl_designsystem), update the values here and every block
+   re-themes automatically. See scripts/check-tokens.sh.
+
+   Layered like the web design system:
+     PRIMITIVES  -> raw brand swatches (do not use directly in blocks)
+     SEMANTIC    -> role tokens the blocks actually consume
+   ========================================================================= */
+
+:root {
+  /* ---- PRIMITIVES (the 7 official Platinumlist colors) ------------------ */
+  --pl-haze:    #7E05E8;  /* Platinum Haze   · Pantone 266 C */
+  --pl-monday:  #79E2FF;  /* Platinum Monday · Pantone 2197 C */
+  --pl-day:     #C7F88A;  /* Platinum Day    · Pantone 372 C */
+  --pl-deep:    #3C0071;  /* Deep Platinum   · Pantone 2685 C */
+  --pl-suede:   #00A5D3;  /* Platinum Suede  · Pantone 312 C (text only) */
+  --pl-sabbath: #221327;  /* Platinum Sabbath· Pantone 5255 C */
+  --pl-black:   #000000;
+  --pl-white:   #FFFFFF;
+
+  /* ---- TYPE ------------------------------------------------------------- */
+  --font-head: 'MD Nichrome', sans-serif;   /* headlines / numbers / kickers */
+  --font-body: 'Inter', sans-serif;         /* everything else */
+
+  /* Presentation scale — sized for a room, not a laptop.
+     HARD FLOOR: nothing on a slide may render below 18px. These are minimums,
+     not targets — size UP into empty space, never down. */
+  --fs-min:        18px;   /* absolute floor for ANY on-slide text */
+  --fs-headline:   72px;
+  --fs-subhead:    32px;
+  --fs-kicker:     24px;
+  --fs-hero-num:   104px;
+  --fs-card-num:   72px;
+  --fs-card-title: 38px;
+  --fs-body:       26px;
+  --fs-ctx:        21px;   /* card descriptions / supporting lines */
+  --fs-label:      22px;
+  --fs-tag:        19px;   /* tag chips */
+  --fs-caption:    18px;   /* footnotes — the floor */
+
+  /* ---- STRUCTURE -------------------------------------------------------- */
+  --slide-w: 1920px;
+  --slide-h: 1080px;
+  --slide-pad: 90px;
+  --card-radius: 24px;
+  --pill-radius: 999px;
+  --gap: 28px;
+  --gap-sm: 16px;
+
+  /* ---- MOTION ----------------------------------------------------------- */
+  --fade: 300ms ease;
+}

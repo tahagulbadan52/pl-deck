@@ -1,0 +1,24 @@
+<!-- BLOCK: layer-columns
+     PURPOSE: Explain 2-3 forces / layers / concepts side by side, icon-led.
+     THEMES: theme-haze (default), theme-sabbath
+     SLOTS:
+       {kicker} optional eyebrow
+       {headline} the assertion
+       {lead} supporting sentence
+       {columns} 2-3 × { icon, tag, title, body }
+     DENSITY: each column is a tall filled card — icon + tag top, title + body
+       middle. If a column has little text, lead with a large icon to fill mass. -->
+<section class="slide theme-haze">
+  <div class="head">
+    <div class="kicker">Reading the Signal</div>
+    <h2 class="headline lg">The trend is real — not a Ramadan artefact</h2>
+    <p class="lead">Two forces were pressing the market at once. We separated them.</p>
+  </div>
+  <div class="fill">
+    <div class="grid grid-3" style="height:100%;">
+      <div class="card card-sabbath feature"><div class="card-top"><span class="icon icon-lg" style="--icon:url('assets/phosphor-icons/SVGs/bold/arrows-out-bold.svg')"></span><span class="label" style="color:var(--accent);">Layer 1</span></div><div><div class="num" style="font-size:var(--fs-card-title);">Ramadan seasonality</div><p class="ctx" style="margin-top:12px;">Recurring every year. We compared this Ramadan to last, per-day, to remove the layer.</p></div><span class="tag">Recurring · seasonal</span></div>
+      <div class="card card-sabbath feature"><div class="card-top"><span class="icon icon-lg" style="--icon:url('assets/phosphor-icons/SVGs/bold/lightning-bold.svg')"></span><span class="label" style="color:var(--accent);">Layer 2</span></div><div><div class="num" style="font-size:var(--fs-card-title);">Conflict shock</div><p class="ctx" style="margin-top:12px;">The Feb 28 strikes added a sharper layer. We compared Recovery vs Conflict Peak in-window.</p></div><span class="tag">External · one-off</span></div>
+      <div class="card card-day feature"><div class="card-top"><span class="icon icon-lg" style="--icon:url('assets/phosphor-icons/SVGs/bold/seal-check-bold.svg')"></span><span class="label">Now</span></div><div><div class="num" style="font-size:var(--fs-card-title);">Both layers cleared</div><p class="ctx" style="margin-top:12px;">Ramadan ended Mar 18, the shock discharged. May measures the real recovery.</p></div><span class="tag">Clean comparison</span></div>
+    </div>
+  </div>
+</section>

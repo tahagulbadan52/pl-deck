@@ -1,0 +1,34 @@
+<!-- BLOCK: timeline-table
+     PURPOSE: Dated sequence of events, last/current row highlighted.
+     THEMES: theme-sabbath (default), theme-haze
+     SLOTS:
+       {kicker} optional eyebrow
+       {sub-label} small bold line
+       {headline} the assertion
+       {lead} supporting sentence
+       {rows} each { date, event, impact }; mark current row class="row-hi"
+       {foot} bottom caption
+     DENSITY: 3-column rows (date | event | impact). 4-6 rows ideal. -->
+<section class="slide theme-sabbath">
+  <div class="head">
+    <div class="kicker">Timeline</div>
+    <div class="subhead">External shock · cleared</div>
+    <h2 class="headline lg">Three forces hit the market.<br>All three have now cleared.</h2>
+    <p class="lead">Ramadan, the US-Iran strikes and the late-March storms are behind us. May trading is on clean ground.</p>
+  </div>
+
+  <div class="fill" style="display:flex; align-items:center;">
+    <div class="table-wrap" style="width:100%;">
+      <table class="pl-table">
+        <tbody>
+          <tr><td class="bold">Feb 17</td><td class="bold">Ramadan begins</td><td>Seasonal shift to cultural events</td></tr>
+          <tr><td class="bold">Feb 28</td><td class="bold">US-Iran strikes</td><td><span class="pos">−71%</span> purchases / day, UAE-wide</td></tr>
+          <tr><td class="bold">Mar 20 – 22</td><td class="bold">Eid Al Fitr 2026</td><td>Holiday under continuing tension</td></tr>
+          <tr><td class="bold">Mar 23 – 27</td><td class="bold">Floods &amp; storms</td><td>Sharjah / Dubai flooded · flights disrupted</td></tr>
+          <tr class="row-hi"><td class="bold">Apr 14 → May 15</td><td class="bold">Recovery 2 window</td><td>Purchases +6% vs pre-conflict baseline</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="foot">The market was growing right up to Feb 28 — sessions +31% YoY, revenue +15% / day. This was external shock, not decay.</div>
+</section>

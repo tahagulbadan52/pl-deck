@@ -1,0 +1,39 @@
+<!-- BLOCK: cover-hero
+     PURPOSE: Opening slide. Giant headline + context pills + tag row.
+     THEMES: theme-haze (default), theme-monday, theme-sabbath
+     SLOTS:
+       {kicker-pills}  1-2 outline pills, top-right (e.g. "UAE STATE OF MARKET")
+       {logo}          PL icon, top-left (use blue on haze, white on sabbath)
+       {headline}      2-line MD Nichrome, .headline.xl
+       {descender}     bold one-liner under headline
+       {subtitle}      supporting sentence
+       {tag-pills}     bottom row of solid context pills
+       {hero-graphic}  optional large icon top-right (phosphor mask)
+     DENSITY: headline must dominate the left 70%; hero-graphic fills right 30%.
+     KICKER: the top-right pills ARE the kicker — remove for a clean cover. -->
+<section class="slide theme-haze">
+  <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+    <img src="assets/Pl Logos/icon/blue/icon_blue.svg" alt="Platinumlist" style="width:96px;height:auto;">
+    <div class="pill-row">
+      <span class="pill">UAE State of Market</span>
+      <span class="pill">Updated 15.05.2026</span>
+    </div>
+  </div>
+
+  <div class="fill" style="display:flex; align-items:center; gap:40px;">
+    <div style="flex:1 1 auto;">
+      <h1 class="headline xl">Recovery<br>Confirmed</h1>
+      <div class="subhead" style="margin-top:36px;">60 Days of Post-Conflict Data</div>
+      <p class="lead" style="color:var(--muted);">The UAE events market is back to its pre-conflict baseline — and climbing.</p>
+    </div>
+    <span class="icon" style="--icon:url('assets/phosphor-icons/SVGs/bold/trend-up-bold.svg'); width:360px; height:360px; color:var(--pl-monday); flex:0 0 auto;"></span>
+  </div>
+
+  <div class="pill-row">
+    <span class="pill solid">Events</span>
+    <span class="pill solid">Attractions</span>
+    <span class="pill solid">GA4 Data · Platinumlist Web</span>
+    <span class="pill solid">Feb 17 → May 15 · 2026</span>
+    <span class="caption" style="align-self:center; margin-left:auto;">CONFIDENTIAL</span>
+  </div>
+</section>

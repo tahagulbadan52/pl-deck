@@ -1,0 +1,45 @@
+<!-- BLOCK: heatmap-matrix
+     PURPOSE: A risk / priority heatmap as a COLOR-GRADED MATRIX, not a table.
+       Use when data is a 2-axis grid (likelihood × impact, effort × value, etc.)
+       and a plain table would read flat. This is the example of the system's
+       "freedom" rule — a bespoke token-based layout promoted into a reusable block.
+     THEMES: theme-sabbath (default), theme-haze
+     SLOTS:
+       {kicker} {headline} {lead}
+       {col-heads} 3 impact columns
+       {rows} 3 likelihood rows; each cell gets a heat class:
+         hm-0 (empty/dash) · hm-1 (low) · hm-2 (monitor) · hm-3 (act) · hm-4 (top)
+       {legend} colour key
+     DENSITY: cells stretch to fill the slide. Cell text >=20px. Hotter = more
+       urgent (lime hm-4 is the hottest). Keep one or two hot cells, not all. -->
+<section class="slide theme-sabbath">
+  <div class="head">
+    <div class="kicker">Risk Heatmap</div>
+    <h2 class="headline lg">Likelihood × business impact</h2>
+    <p class="lead">Hotter cells take priority for mitigation investment.</p>
+  </div>
+  <div class="fill" style="display:flex; flex-direction:column; gap:22px;">
+    <div class="heatmap">
+      <div class="hm-h" style="justify-content:flex-start;font-size:16px;color:var(--muted);">Likelihood ↓ / Impact →</div>
+      <div class="hm-h">Moderate</div><div class="hm-h">High</div><div class="hm-h">Severe</div>
+      <div class="hm-rl">High</div>
+      <div class="hm-cell hm-0">—</div>
+      <div class="hm-cell hm-3">Currency volatility</div>
+      <div class="hm-cell hm-4">Regional armed conflict · Logistics disruption · Cyber &amp; hybrid threats</div>
+      <div class="hm-rl">Medium</div>
+      <div class="hm-cell hm-1">Talent mobility</div>
+      <div class="hm-cell hm-2">Regulatory fragmentation</div>
+      <div class="hm-cell hm-0">—</div>
+      <div class="hm-rl">Low</div>
+      <div class="hm-cell hm-1">Reputational / ESG</div>
+      <div class="hm-cell hm-0">—</div>
+      <div class="hm-cell hm-0">—</div>
+    </div>
+    <div class="hm-legend">
+      <span class="k"><span class="sw" style="background:var(--pl-deep)"></span>Lower priority</span>
+      <span class="k"><span class="sw" style="background:var(--pl-haze)"></span>Monitor</span>
+      <span class="k"><span class="sw" style="background:var(--pl-monday)"></span>Act</span>
+      <span class="k"><span class="sw" style="background:var(--pl-day)"></span>Top priority</span>
+    </div>
+  </div>
+</section>

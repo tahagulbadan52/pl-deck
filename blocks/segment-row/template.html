@@ -1,0 +1,22 @@
+<!-- BLOCK: segment-row
+     PURPOSE: 3-4 parallel segments as tall, filled feature cards.
+     THEMES: theme-monday (default), theme-day
+     SLOTS: {kicker} {headline} {lead} ; {cards} 3-4 × { icon, title, desc, tag }
+     DENSITY: cards stretch in .fill. EACH card has: an icon BADGE (solid chip,
+       top), title + description (>=21px) middle, a tag chip (>=19px) bottom, AND
+       a faint .wm watermark of the same icon. Badge = weight; watermark = fill. -->
+<section class="slide theme-monday">
+  <div class="head">
+    <div class="kicker">Reach 2026</div>
+    <h2 class="headline lg">Leading the Middle East. Expanding worldwide.</h2>
+    <p class="lead">We started as MENA's leading ticketing platform — and today we're going global.</p>
+  </div>
+  <div class="fill">
+    <div class="grid grid-4" style="height:100%;">
+      <div class="card card-haze feature center"><span class="icon wm" style="--icon:url('assets/phosphor-icons/SVGs/bold/map-pin-bold.svg')"></span><div class="card-top"><span class="icon-badge"><span class="icon" style="--icon:url('assets/phosphor-icons/SVGs/bold/map-pin-bold.svg')"></span></span></div><div><div class="num" style="font-size:var(--fs-card-title);">MENA</div><p class="ctx" style="margin-top:14px;">UAE · KSA · Oman · Kuwait · Bahrain · Egypt — the home base.</p></div><span class="tag">Home base</span></div>
+      <div class="card card-haze feature center"><span class="icon wm" style="--icon:url('assets/phosphor-icons/SVGs/bold/airplane-takeoff-bold.svg')"></span><div class="card-top"><span class="icon-badge"><span class="icon" style="--icon:url('assets/phosphor-icons/SVGs/bold/airplane-takeoff-bold.svg')"></span></span></div><div><div class="num" style="font-size:var(--fs-card-title);">Europe</div><p class="ctx" style="margin-top:14px;">Arab concert tours and festivals across the diaspora.</p></div><span class="tag">New markets</span></div>
+      <div class="card card-haze feature center"><span class="icon wm" style="--icon:url('assets/phosphor-icons/SVGs/bold/flag-banner-bold.svg')"></span><div class="card-top"><span class="icon-badge"><span class="icon" style="--icon:url('assets/phosphor-icons/SVGs/bold/flag-banner-bold.svg')"></span></span></div><div><div class="num" style="font-size:var(--fs-card-title);">Global F1</div><p class="ctx" style="margin-top:14px;">Premium race-day inventory across the calendar.</p></div><span class="tag">Premium</span></div>
+      <div class="card card-haze feature center"><span class="icon wm" style="--icon:url('assets/phosphor-icons/SVGs/bold/ticket-bold.svg')"></span><div class="card-top"><span class="icon-badge"><span class="icon" style="--icon:url('assets/phosphor-icons/SVGs/bold/ticket-bold.svg')"></span></span></div><div><div class="num" style="font-size:var(--fs-card-title);">Attractions</div><p class="ctx" style="margin-top:14px;">World-class brand partners — indoor, outdoor, family.</p></div><span class="tag">Always-on</span></div>
+    </div>
+  </div>
+</section>

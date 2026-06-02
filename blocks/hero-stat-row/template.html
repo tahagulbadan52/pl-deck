@@ -1,0 +1,30 @@
+<!-- BLOCK: hero-stat-row
+     PURPOSE: One dominant stat (filled card) + N supporting deltas (outline cards).
+     THEMES: theme-day (default), theme-monday
+     SLOTS:
+       {kicker} optional eyebrow
+       {sub-label} small bold line
+       {headline} the assertion
+       {lead} supporting paragraph
+       {hero} { icon, label, num, ctx } -> filled card
+       {supporting} 2-3 × { icon, label, num } -> outline cards
+       {foot} bottom caption
+     DENSITY: hero card ~1.6x width. Every card carries an icon so the outline
+       cards aren't a lone number floating in space. -->
+<section class="slide theme-day">
+  <div class="head">
+    <div class="kicker">The Thesis</div>
+    <div class="subhead">We are in the same boat</div>
+    <h2 class="headline lg">Your audience never left.<br>Now they're buying again.</h2>
+    <p class="lead">In our April 15 update the signal was "bending back up." Thirty days later, daily revenue, purchases and page views have all closed the gap — and overtaken February.</p>
+  </div>
+  <div class="fill" style="display:flex;">
+    <div class="grid" style="grid-template-columns: 1.6fr 1fr 1fr 1fr; width:100%; align-items:stretch;">
+      <div class="card card-haze feature"><div class="card-top"><span class="icon icon-lg" style="--icon:url('assets/phosphor-icons/SVGs/bold/trend-up-bold.svg')"></span></div><div><div class="num hero">+261%</div><div class="label">Purchases / day vs Conflict Peak</div></div><p class="ctx" style="margin:0;">From 791 to 2,859 per day</p></div>
+      <div class="card card-outline feature center"><div class="card-top"><span class="icon icon-lg" style="--icon:url('assets/phosphor-icons/SVGs/bold/trend-up-bold.svg')"></span></div><div><div class="num hero">+6%</div><div class="label">Purchases / d vs Pre</div></div></div>
+      <div class="card card-outline feature center"><div class="card-top"><span class="icon icon-lg" style="--icon:url('assets/phosphor-icons/SVGs/bold/currency-circle-dollar-bold.svg')"></span></div><div><div class="num hero">+5%</div><div class="label">Revenue / d vs Pre</div></div></div>
+      <div class="card card-outline feature center"><div class="card-top"><span class="icon icon-lg" style="--icon:url('assets/phosphor-icons/SVGs/bold/chart-line-bold.svg')"></span></div><div><div class="num hero">+22%</div><div class="label">Page views / d vs Pre</div></div></div>
+    </div>
+  </div>
+  <div class="foot">Updated through May 15, 2026 — 60 days of post-conflict data.</div>
+</section>

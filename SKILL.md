@@ -107,12 +107,217 @@ Wait for user approval of the structure before generating.
 
 ## Phase 2: HTML Generation
 
+### Block System — COMPOSE, don't draw from scratch (read this first)
+
+This skill is a **presentation system**, not a slide improviser. A library of
+pre-built, brand-correct slide blocks lives in `blocks/`. Building a deck means
+**picking blocks and pouring content into their slots** — like copying a template
+and swapping the text — NOT reasoning out a fresh layout every time.
+
+**Workflow:**
+
+1. **Read the catalog** — `block-catalog.md` is the menu (block IDs, slots,
+   themes, and which reference slide each came from). Read it before composing.
+2. **Map the approved structure to block IDs.** Every slide in your plan must
+   resolve to a block. Example: `cover-hero → stat-grid → segment-row →
+   hero-stat-row → data-table → … → cta-nextsteps`.
+3. **For each slide, open `blocks/<id>/template.html`**, copy its markup, set the
+   right `.theme-*` class, and replace the example content with the user's
+   content. The header comment in each template lists the exact slots. Adjust
+   numbers (grid columns, rows) to fit the content — but do not redesign the block.
+4. **Assemble** all slides into one self-contained HTML file. Follow the
+   **"Deck assembly — the EXACT self-contained output"** section below verbatim
+   (file skeleton, base64 inlining of font + icons + logos, navigable runtime,
+   card recipes). This is the reproducible recipe — do not improvise the wiring.
+5. **Lint + density gates** (below) still apply, then preview, then PDF on request.
+
+### Card-fill mandate (HARD — this is what makes decks look finished)
+
+A slide is shown on a wall, not read on a laptop. Sparse cards and timid type
+make a deck feel unfinished. Every block already encodes this; never undo it.
+
+0. **FONT FLOOR — nothing renders below 18px. Ever.** This includes tag chips,
+   captions, legend keys and footnotes. Tag chips ≥19px (`--fs-tag`), card
+   descriptions ≥21px (`--fs-ctx`), labels ≥22px. If text would need to go below
+   18px to fit, the content is too long or the element too small — cut words or
+   enlarge the element, never shrink the type. On a projector, sub-18px text is
+   simply not read.
+1. **Presentation-scale type.** Use the sizes in `tokens.css` (headline 72, hero
+   number 104, card number 72, body 26, label 22). These are floors, not targets —
+   size UP into empty space, never down. Body text never below 22px.
+1b. **The 55% rule + watermark fill.** No card may be more than ~55% empty space.
+   When content is genuinely short, fill the dead area with a faint **watermark
+   icon** — `<span class="icon wm" style="--icon:url(...same icon...)"></span>` as
+   the card's first child. It sits behind the content at low opacity and makes a
+   sparse card read as designed, not broken. Also use a large primary icon
+   (`icon-xl`, 104px). If a card is STILL mostly empty after a watermark + big
+   icon + 21px+ text, the grid has too many cells — drop to fewer, wider cards.
+2. **Every grid card needs all three regions** so the vertical centre is never
+   empty: an **icon** (top, phosphor `.icon icon-lg`), the **content** (big
+   number or title + label in the middle), and a **tag chip or context line**
+   (bottom). Use `class="card feature"` — it distributes the three with
+   `space-between`. A number floating alone in a card is a defect.
+3. **Icons are mandatory on feature/stat/segment/pillar/summary cards, and the
+   primary one sits in a solid `.icon-badge`** (lime chip + dark icon on
+   purple/dark cards; purple chip + white icon on light cards). Never leave the
+   main card icon as a bare thin outline — it reads "light". Pick a phosphor bold
+   icon that fits (`ls assets/phosphor-icons/SVGs/bold/ | grep -i <keyword>`).
+4. **Cards fill their grid.** Put the grid in a `.fill` wrapper with
+   `height:100%` so cards stretch — then they MUST be filled per rule 2. If you
+   genuinely can't fill them, drop to fewer/wider cards; do not ship 80%-empty cards.
+5. **When a slide still feels bare, add a visual — don't leave whitespace.**
+   Either an icon, OR an `.img-placeholder` with a specific generation prompt
+   (subject, mood, composition, dimensions) the user can render in nano-banana /
+   an AI image tool and drop in later. A directable placeholder always beats dead
+   space. Background/hero visuals on cover, divider and section slides are
+   encouraged via placeholders.
+
+### Freedom to design (blocks are a starting point, not a cage)
+
+Blocks make the common case fast and on-brand. They are NOT a limit. When the
+content would be better served by a bespoke layout, design one — using the
+tokens and `lib/deck-base.css` primitives (colors, type, cards, grids) so it
+stays on-brand. **Judge by the data, not the block list:**
+
+- A **2-axis matrix** (likelihood × impact, effort × value) → a colour-graded
+  heatmap (`heatmap-matrix`), never a flat table.
+- A **process / sequence** → a horizontal stepper with connectors.
+- A **geographic** story → a map treatment or an `.img-placeholder` for one.
+- A **comparison** → side-by-side columns with a divider.
+- Anything where a generic card grid would read flat or unclear.
+
+When you build a bespoke layout, hold the same bar: presentation-scale type
+(≥18px), icons, no >55%-empty boxes, token-based colors only.
+
+**Promote what recurs.** If a bespoke layout is good and reusable, save it as a
+new block (`blocks/<new-id>/template.html` + one catalog row) so the system grows
+deck-over-deck. The heatmap matrix is exactly this: it started as a one-off fix
+for a flat risk table and became a permanent block. That is how the library
+should keep expanding.
+
+### Deck assembly — the EXACT self-contained output (reproducible recipe)
+
+Following this section verbatim reproduces the current deck output byte-for-intent
+in any folder. The final deck is ONE self-contained `.html` file. Build it like this.
+
+**1 — File skeleton:**
+```html
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[Deck Title] · Platinumlist</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@font-face { font-family:'MD Nichrome'; src:url(data:font/otf;base64,[B64]) format('opentype'); font-weight:700; }
+[contents of tokens.css]
+[contents of lib/deck-base.css]
+[contents of lib/deck-runtime.css]
+</style></head><body>
+<div class="slide-wrapper"><div id="slideContainer">
+  <div class="slide-holder" data-i="0"><section class="slide theme-…">…block 1…</section></div>
+  <div class="slide-holder" data-i="1"><section class="slide theme-…">…block 2…</section></div>
+  … one .slide-holder per slide …
+</div></div>
+<div class="slide-counter" id="count"></div>
+<script>[contents of lib/deck-runtime.js]</script>
+</body></html>
+```
+
+**2 — Inlining (HARD — the deck must work from any folder, no sibling assets):**
+- **Font:** base64-encode `assets/MDNichrome-Bold (3).otf` into the `@font-face`.
+- **CSS:** paste `tokens.css`, then `lib/deck-base.css`, then `lib/deck-runtime.css`
+  into one `<style>` (in that order — runtime last).
+- **Phosphor icons:** every `url('assets/phosphor-icons/SVGs/bold/NAME-bold.svg')`
+  (used by BOTH `.icon` and `.wm` watermarks) → base64 `data:image/svg+xml;base64,…`.
+  The icon-inlining script in the PDF section already does this; run it on the
+  composed HTML. A file-path mask renders as a solid block in print — always inline.
+- **Logos:** do NOT use `<img src="assets/…">`. Read the SVG file and paste its
+  markup inline. The PL cover icon goes inside `<div class="cover-logo">…svg…</div>`
+  (the source SVG is 1000px; `.cover-logo` constrains it). Use the white icon on
+  dark/haze covers, blue on light.
+
+**3 — Themes & rules** are already in `lib/deck-base.css` and the rules above:
+presentation-scale type (font floor 18px), kickers optional, cyan+haze allowed,
+MD Nichrome `letter-spacing: normal` (negative tracking banned), no >55%-empty cards.
+
+**4 — Card construction recipes** (copy these exactly; they are what makes cards
+look finished). All live on `lib/deck-base.css` classes:
+
+- **Feature card** (segment / pillar / takeaway — title + text, sparse):
+  icon BADGE top, content centred, optional tag bottom, AND a watermark. Use `.center`.
+  ```html
+  <div class="card card-haze feature center">
+    <span class="icon wm" style="--icon:url('assets/…/ICON-bold.svg')"></span>
+    <div class="card-top">
+      <span class="icon-badge"><span class="icon" style="--icon:url('assets/…/ICON-bold.svg')"></span></span>
+      <span class="idx">01</span></div>
+    <div><div class="num" style="font-size:var(--fs-card-title);">Title</div>
+         <p class="ctx" style="margin-top:14px;">Description ≥21px.</p></div>
+    <span class="tag">Tag</span>
+  </div>
+  ```
+- **Stat card** (number-led): icon badge top, hero number, label, ctx bottom, watermark.
+  3 real regions → keep default `feature` (space-between). 2 regions → add `center`.
+  ```html
+  <div class="card card-haze feature">
+    <span class="icon wm" style="--icon:url('assets/…/ICON-bold.svg')"></span>
+    <div class="card-top"><span class="icon-badge"><span class="icon" style="--icon:url('assets/…/ICON-bold.svg')"></span></span></div>
+    <div><div class="num hero">+261%</div><div class="label">Label</div></div>
+    <p class="ctx" style="margin:0;">Context ≥21px.</p>
+  </div>
+  ```
+- **Primary card icons MUST use `.icon-badge`** (a solid accent chip with the icon
+  knocked out), NOT a bare outline icon. We only ship phosphor *bold* (outline)
+  weight; bare outlines read thin and "light" on busy cards, so the badge gives
+  them weight. Bare `.icon`/`.icon-lg` is only for inline use (tile rows, list-title
+  headers) and the `.wm` watermark.
+- **Watermark is mandatory** on every feature/stat/pillar/segment card: same icon
+  as the card, `class="icon wm"`, as the FIRST child. It fills the dead space.
+- **Icon tiles** (turn a short list into a filled 2-col visual): `.tiles` > `.tile`
+  (`<span class="icon">` + label). **Checklist** for ≤6 steps: `<ul class="checklist">`.
+- **Heatmap / bespoke**: use `.heatmap` + `.hm-*` (see `blocks/heatmap-matrix`).
+- **Decision rule:** card with a distinct bottom region (tag OR ctx) → `feature`
+  (space-between). Card with only icon + text → `feature center`. Either way, add a
+  watermark so it's never >55% empty.
+
+**5 — Ready-made assembler:** `scripts/assemble_deck.py` does ALL of the above.
+Import it, build a list of slide-HTML strings, and call `build()`:
+```python
+from assemble_deck import *      # ic, stat, feat, pillar, tile, chk, imgph, logo, build
+S = []
+S.append(f'''<section class="slide theme-sabbath">
+  <div class="cover-logo">{logo('icon_white')}</div>
+  <div class="fill" style="display:flex;align-items:center;">
+    <h1 class="headline xl">Deck Title</h1></div></section>''')
+S.append(feat('map-pin', 'MENA', 'UAE · KSA · Oman · …', 'Home base'))   # filled card
+S.append(stat('trend-up', '+261%', 'Purchases / day', 'vs conflict peak'))
+# … one entry per slide …
+build(S, "Deck Title", "/abs/path/deck-name-deck.html")
+```
+`ic/stat/feat/pillar/tile` emit the standard filled patterns (icon-xl + content +
+tag + watermark), and `build()` inlines the font, tokens.css, deck-base.css,
+deck-runtime.css/js, every phosphor icon and the logos — so the output is one
+portable file. This is the exact path that produced the reference deck; the same
+inputs reproduce the same output in any folder.
+
+**Foundation files (single source of truth — never hardcode what they define):**
+- `tokens.css` — the 7 brand colors, type scale, spacing, radius. All blocks
+  reference these variables. Synced from the upstream design system via
+  `scripts/check-tokens.sh` (run it at session start; if `UPDATE_AVAILABLE`,
+  review brand changes and update `tokens.css`).
+- `lib/deck-base.css` — themes, cards (incl. `.feature`/`.center`/`.wm` watermark),
+  grids, tables, pills, tags, tiles, icons (`icon-lg`/`icon-xl`), checklist, heatmap.
+- `lib/deck-runtime.css` + `lib/deck-runtime.js` — the navigable deck shell
+  (one slide at a time, arrow-key nav, viewport scaling, print = stacked). Inline
+  both in every deck.
+- `blocks/` — 23 slide blocks (see catalog, incl. `heatmap-matrix`).
+  `scripts/build-gallery.sh` renders every block to `scripts/_shots/` for visual QA.
+
 ### Design System
 
 **Format:** 16:9 (1920 x 1080px), self-contained HTML file
 
 **Fonts:**
-- **MD Nichrome Bold** — Headlines ONLY. Always `text-transform: uppercase`, `letter-spacing: -0.02em`. Load from base64 embedded @font-face. The font file is at: `~/.claude/skills/pl-deck/assets/MDNichrome-Bold (3).otf` — convert to base64 and embed.
+- **MD Nichrome Bold** — Headlines ONLY. Always `text-transform: uppercase`. **Do NOT apply negative letter-spacing** — MD Nichrome is drawn with its own spacing; use `letter-spacing: normal` (the default). Negative tracking cramps the headlines and is banned. Load from base64 embedded @font-face. The font file is at: `~/.claude/skills/pl-deck/assets/MDNichrome-Bold (3).otf` — convert to base64 and embed.
 - **Inter** — Everything else (body, labels, descriptions, card text). Load from Google Fonts CDN: `https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap`
 
 **Type scale (enforce strictly):**
@@ -144,12 +349,18 @@ These are the ONLY colors allowed in any Platinumlist deck. Use exact hex values
 
 **Hard rules (non-negotiable, from design team review):**
 
-1. **Cyan NEVER lives with Haze Purple on the same slide.** If a slide has Platinum Monday anywhere (bg, card, text, icon), it CANNOT have Platinum Haze anywhere, and vice versa. Sabbath (near-black) is NOT purple for this rule — it's treated as dark neutral.
+1. **Cyan + Haze MAY share a slide** (updated per the approved reference deck — see Rule 24d). Monday cyan backgrounds with Haze purple cards/headlines are the deck's signature look. Just keep contrast safe (no Haze text on Deep Platinum, no Monday on Suede).
 2. **Platinum Day (lime) is backgrounds ONLY.** Never use lime as text color.
 3. **Platinum Monday (cyan) and Platinum Haze (purple) are backgrounds + logo ONLY.** Never as body text. Can be used in large hero numbers / headlines ONLY if contrast is safe.
 4. **Platinum Suede is text ONLY.** Never as a background.
 5. **Primary colors never combine with their darker siblings.** No Haze on Deep Platinum, no Monday on Suede. Too little contrast.
 6. **Green on Purple is BANNED.** Lime text/blocks on Haze background = do not ship.
+
+**NOTE — themes now live in code.** The canonical theme definitions are in
+`lib/deck-base.css` (`.theme-haze`, `.theme-monday`, `.theme-day`,
+`.theme-sabbath`), matched to the reference deck. The table below is the design
+rationale; the CSS is the source of truth. Set a theme by adding its class to a
+block's `.slide`.
 
 **Approved on-slide combinations** (pick ONE per slide):
 
@@ -618,9 +829,9 @@ Want me to adjust any slides? The HTML is still editable — just tell me what t
 22. No orphan stats without context (always provide comparison or benchmark)
 23. No Comic Sans, Papyrus, or any font other than MD Nichrome + Inter
 24. No centered paragraph text — left-align body text, center only headlines and hero stats
-24b. **No eyebrow/kicker labels above headlines** (things like "— BY THE NUMBERS", "— ABOUT US", "— PLATFORM OVERVIEW" in small caps with a dash). They eat vertical real estate that should belong to the headline. The headline itself should carry the topic. Size up the headline to 72–96px instead. This is a HARD rule — design team feedback.
+24b. **Eyebrow/kicker labels are OPTIONAL (per the approved reference deck).** The reference UAE Events deck uses short MD Nichrome kickers on most slides (`THE THESIS`, `PLATFORM`, `SERVICE 04`). Blocks support them via the `.kicker` element; suppress them per-slide by adding `no-kicker` to the `.slide` class, or per-deck by default. Decide once at intake and stay consistent. When kickers are OFF, size the headline up to 72–96px so the slide doesn't look unfinished. Never use the old dash-prefixed style (`— BY THE NUMBERS`); kickers are plain uppercase labels.
 24c. **Color palette: use ONLY the 7 official Platinumlist colors** (Haze, Monday, Day, Deep Platinum, Suede, Sabbath, White). No custom hex codes, no tints, no off-palette greys. See the Color Palette section for the full rules.
-24d. **Cyan + Haze purple never share a slide.** If Platinum Monday (`#79E2FF`) appears on a slide, Platinum Haze (`#7E05E8`) cannot appear on that same slide, and vice versa. Sabbath dark is not "purple" for this rule.
+24d. **Cyan + Haze purple may share a slide (UPDATED per the approved reference deck).** The reference deck deliberately pairs Monday cyan backgrounds with Haze purple cards and headlines (its stat, segment and service slides). The block themes (`theme-monday`, `theme-day`) use purple cards on cyan/lime grounds. This supersedes the earlier blanket ban. Still avoid LOW-CONTRAST pairings: no Haze text directly on Deep Platinum, no Monday on Suede. Lime text on Haze remains banned (use lime for backgrounds/accents/deltas, not body text on purple).
 
 ### Pricing Card Rules (MANDATORY for any slide with packages/tiers)
 

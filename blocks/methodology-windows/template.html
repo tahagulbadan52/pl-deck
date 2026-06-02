@@ -1,0 +1,27 @@
+<!-- BLOCK: methodology-windows
+     PURPOSE: Define comparison windows / methodology, icon-led filled cards.
+     THEMES: theme-sabbath (default), theme-haze
+     SLOTS:
+       {kicker} optional eyebrow
+       {headline} the assertion
+       {lead} how-to-read note
+       {windows} 4 × { icon, name, dates, descriptor }
+       {notes} bottom data-source caption
+     DENSITY: 4 cards stretch in .fill — icon top, name + dates middle,
+       descriptor as bottom tag. -->
+<section class="slide theme-sabbath">
+  <div class="head">
+    <div class="kicker">Methodology &amp; Data Notes</div>
+    <h2 class="headline lg">A four-window comparison, per-day normalised</h2>
+    <p class="lead">Every % delta is per-day normalised, independent of window length.</p>
+  </div>
+  <div class="fill">
+    <div class="grid grid-4" style="height:100%;">
+      <div class="card card-outline feature"><div class="card-top"><span class="icon icon-lg" style="--icon:url('assets/phosphor-icons/SVGs/bold/flag-banner-bold.svg')"></span></div><div><div class="num" style="font-size:var(--fs-card-title);">Pre-Conflict</div><div class="label" style="color:var(--accent);margin-top:8px;">Feb 17 – Feb 27 · 11d</div></div><span class="tag">Baseline</span></div>
+      <div class="card card-outline feature"><div class="card-top"><span class="icon icon-lg" style="--icon:url('assets/phosphor-icons/SVGs/bold/warning-bold.svg')"></span></div><div><div class="num" style="font-size:var(--fs-card-title);">Conflict Peak</div><div class="label" style="color:var(--accent);margin-top:8px;">Feb 28 – Mar 16 · 17d</div></div><span class="tag">Demand paused</span></div>
+      <div class="card card-outline feature"><div class="card-top"><span class="icon icon-lg" style="--icon:url('assets/phosphor-icons/SVGs/bold/chart-line-bold.svg')"></span></div><div><div class="num" style="font-size:var(--fs-card-title);">Recovery 1</div><div class="label" style="color:var(--accent);margin-top:8px;">Mar 17 – Apr 13 · 28d</div></div><span class="tag">Last update</span></div>
+      <div class="card card-sabbath feature" style="border:3px solid var(--accent);"><div class="card-top"><span class="icon icon-lg" style="--icon:url('assets/phosphor-icons/SVGs/bold/seal-check-bold.svg')"></span><span class="idx">NEW</span></div><div><div class="num" style="font-size:var(--fs-card-title);">Recovery 2</div><div class="label" style="color:var(--accent);margin-top:8px;">Apr 14 – May 15 · 32d</div></div><span class="tag">60-day signal</span></div>
+    </div>
+  </div>
+  <div class="caption">Data source · Google Analytics 4 — Platinumlist web property 349972872. Metrics: sessions, users, page views, add-to-cart, checkout, purchases, revenue (AED).</div>
+</section>

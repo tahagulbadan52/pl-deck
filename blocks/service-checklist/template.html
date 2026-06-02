@@ -1,0 +1,36 @@
+<!-- BLOCK: service-checklist
+     PURPOSE: A service slide — "how it works" list on the left, icon stats right.
+     THEMES: theme-day (default), theme-monday
+     SLOTS:
+       {kicker} SERVICE 0X
+       {title} service name
+       {lead} description
+       {list-title} e.g. "HOW IT WORKS" (with a header icon)
+       {checklist} up to 6 items (presentation-scale, generously spaced)
+       {stats} 2 × { icon, num, label, ctx }
+     DENSITY: left list card 58% with an icon header; right stat stack 42%,
+       each stat icon-led and filled. -->
+<section class="slide theme-day">
+  <div class="head">
+    <div class="kicker">Service 02</div>
+    <h2 class="headline lg">CRM Marketing</h2>
+    <p class="lead">We target CRM campaigns only at users still in the region — converting warm leads into tickets.</p>
+  </div>
+  <div class="fill" style="display:flex; gap:36px; align-items:stretch;">
+    <div class="card card-outline" style="flex:1.3 1 0; justify-content:center;">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:8px;"><span class="icon icon-lg" style="--icon:url('assets/phosphor-icons/SVGs/bold/envelope-bold.svg');color:var(--text);"></span><div class="subhead" style="color:var(--text);">How it works</div></div>
+      <ul class="checklist">
+        <li>Geo-fenced to active UAE audience</li>
+        <li>Focused on confirmed, happening events</li>
+        <li>Segmented by past genre / artist affinity</li>
+        <li>Frequency-capped to protect deliverability</li>
+        <li>Suppressed against cancelled inventory</li>
+        <li>Email + push, multi-touch sequences</li>
+      </ul>
+    </div>
+    <div style="flex:1 1 0; display:flex; flex-direction:column; gap:20px;">
+      <div class="card card-haze feature" style="flex:1;"><div class="card-top"><span class="icon icon-lg" style="--icon:url('assets/phosphor-icons/SVGs/bold/trend-up-bold.svg')"></span></div><div><div class="num hero">+72%</div><div class="label">Direct purchases / day</div></div><p class="ctx" style="margin:0;">Recovery 2 vs Recovery 1 — loyal base buying again</p></div>
+      <div class="card card-haze feature" style="flex:1;"><div class="card-top"><span class="icon icon-lg" style="--icon:url('assets/phosphor-icons/SVGs/bold/users-three-bold.svg')"></span></div><div><div class="num hero">~90%</div><div class="label">UAE residents share</div></div><p class="ctx" style="margin:0;">The audience to over-invest in right now</p></div>
+    </div>
+  </div>
+</section>

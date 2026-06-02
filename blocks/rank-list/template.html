@@ -1,0 +1,37 @@
+<!-- BLOCK: rank-list
+     PURPOSE: Two columns of ranked rows (label ... delta), each with a header.
+     THEMES: theme-haze (default), theme-sabbath
+     SLOTS:
+       {kicker} optional eyebrow
+       {sub-label} small bold line
+       {headline} the assertion
+       {lead} supporting sentence
+       {colA} header + rows { label, delta }
+       {colB} header + rows { label, delta }
+     DENSITY: 6-8 rows per column; rows are pill-rounded bands for legibility. -->
+<section class="slide theme-haze">
+  <div class="head">
+    <div class="kicker">Recovery 2 By Genre</div>
+    <div class="subhead">Now — who's bouncing back</div>
+    <h2 class="headline lg">Seven categories now above pre-conflict (was 5 at 15.04)</h2>
+  </div>
+
+  <div class="fill" style="display:flex; gap:48px;">
+    <div style="flex:1; display:flex; flex-direction:column; gap:14px;">
+      <div class="delta up" style="font-size:18px;">Fully recovered · above pre-conflict</div>
+      <div class="card card-sabbath" style="flex-direction:row;justify-content:space-between;padding:18px 28px;"><span>Automotive</span><span class="delta" style="color:var(--accent)">+412%</span></div>
+      <div class="card card-sabbath" style="flex-direction:row;justify-content:space-between;padding:18px 28px;"><span>Arabic Concerts</span><span class="delta" style="color:var(--accent)">+118%</span></div>
+      <div class="card card-sabbath" style="flex-direction:row;justify-content:space-between;padding:18px 28px;"><span>Orchestra</span><span class="delta" style="color:var(--accent)">+44%</span></div>
+      <div class="card card-sabbath" style="flex-direction:row;justify-content:space-between;padding:18px 28px;"><span>Indoor Attractions</span><span class="delta" style="color:var(--accent)">+38%</span></div>
+      <div class="card card-sabbath" style="flex-direction:row;justify-content:space-between;padding:18px 28px;"><span>Cultural Festivals</span><span class="delta" style="color:var(--accent)">+22%</span></div>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:14px;">
+      <div class="delta up" style="font-size:18px;">Bouncing hard vs conflict · climbing back</div>
+      <div class="card card-sabbath" style="flex-direction:row;justify-content:space-between;padding:18px 28px;"><span>Zoos &amp; Aquariums</span><span class="delta" style="color:var(--accent)">+395%</span></div>
+      <div class="card card-sabbath" style="flex-direction:row;justify-content:space-between;padding:18px 28px;"><span>Water Parks</span><span class="delta" style="color:var(--accent)">+304%</span></div>
+      <div class="card card-sabbath" style="flex-direction:row;justify-content:space-between;padding:18px 28px;"><span>EDM / Underground</span><span class="delta" style="color:var(--accent)">+212%</span></div>
+      <div class="card card-sabbath" style="flex-direction:row;justify-content:space-between;padding:18px 28px;"><span>Dance Shows</span><span class="delta" style="color:var(--accent)">+186%</span></div>
+      <div class="card card-sabbath" style="flex-direction:row;justify-content:space-between;padding:18px 28px;"><span>Rock</span><span class="delta" style="color:var(--accent)">+162%</span></div>
+    </div>
+  </div>
+</section>

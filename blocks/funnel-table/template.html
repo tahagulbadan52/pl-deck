@@ -1,0 +1,37 @@
+<!-- BLOCK: funnel-table
+     PURPOSE: Full funnel — many metrics across windows with +/- delta columns.
+     THEMES: theme-haze (default), theme-sabbath
+     SLOTS:
+       {kicker} optional eyebrow
+       {sub-label} small bold line
+       {headline} the assertion
+       {lead} supporting sentence
+       {rows} metric rows with values + delta cols (.pos / .neg)
+       {foot} bottom caption
+     DENSITY: up to 7 rows. Use .pos for above-baseline, .neg for below. -->
+<section class="slide theme-haze">
+  <div class="head">
+    <div class="kicker">Funnel · Round-Trip</div>
+    <div class="subhead">Full round-trip · per day</div>
+    <h2 class="headline lg">Conflict impact — and the full round-trip bounce</h2>
+    <p class="lead">Every core funnel metric has recovered. Five of seven are now above pre-conflict.</p>
+  </div>
+
+  <div class="fill" style="display:flex; align-items:center;">
+    <div class="table-wrap" style="width:100%;">
+      <table class="pl-table">
+        <thead><tr><th>Metric</th><th>Pre/d</th><th>Conflict/d</th><th>Recovery 2/d</th><th>vs Conflict</th><th>vs Pre</th></tr></thead>
+        <tbody>
+          <tr><td class="bold">Sessions</td><td>161,639</td><td>86,057</td><td>159,288</td><td class="pos">+85%</td><td class="neg">−1%</td></tr>
+          <tr><td class="bold">Page views</td><td>294,062</td><td>143,642</td><td>358,698</td><td class="pos">+150%</td><td class="pos">+22%</td></tr>
+          <tr><td class="bold">Users</td><td>95,710</td><td>49,946</td><td>81,438</td><td class="pos">+63%</td><td class="neg">−15%</td></tr>
+          <tr><td class="bold">Add to cart</td><td>17,971</td><td>5,214</td><td>19,624</td><td class="pos">+276%</td><td class="pos">+9%</td></tr>
+          <tr><td class="bold">Checkouts</td><td>4,348</td><td>1,101</td><td>3,210</td><td class="pos">+192%</td><td class="neg">−26%</td></tr>
+          <tr><td class="bold">Purchases</td><td>2,698</td><td>791</td><td>2,859</td><td class="pos">+261%</td><td class="pos">+6%</td></tr>
+          <tr><td class="bold">Revenue (AED)</td><td>1.22M</td><td>0.28M</td><td>1.28M</td><td class="pos">+351%</td><td class="pos">+5%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="foot">The two metrics still below pre-conflict — users &amp; checkouts — reflect returning loyalty: fewer one-off visitors, more repeat buyers per session.</div>
+</section>

@@ -1,0 +1,33 @@
+<!-- BLOCK: split-audience
+     PURPOSE: Narrative on the left, icon-led stat cards on the right.
+     THEMES: theme-day (default), theme-monday
+     SLOTS:
+       {kicker} optional eyebrow
+       {sub-label} small bold line
+       {headline} the assertion
+       {left} lead + checklist
+       {right} 2 × { icon, num, label, ctx }
+       {foot} bottom caption
+     DENSITY: left 55% text, right 45% stat stack. Right cards icon-led + filled. -->
+<section class="slide theme-day">
+  <div class="head">
+    <div class="kicker">Audience Mix</div>
+    <div class="subhead">Who's buying now</div>
+    <h2 class="headline lg">Residents are the base. Tourists are the tailwind.</h2>
+  </div>
+  <div class="fill" style="display:flex; gap:48px; align-items:stretch;">
+    <div style="flex:1.2 1 0; display:flex; flex-direction:column; gap:24px; justify-content:center;">
+      <p class="lead">UAE residents stayed the steady base through the conflict. Tourist markets are the new growth layer in May.</p>
+      <ul class="checklist">
+        <li>Oman — above pre-conflict, drive-in demand</li>
+        <li>Saudi — Eid &amp; school-break travel restarted</li>
+        <li>UK / Europe — travel advisories normalised</li>
+      </ul>
+    </div>
+    <div style="flex:1 1 0; display:flex; flex-direction:column; gap:20px;">
+      <div class="card card-haze feature" style="flex:1;"><div class="card-top"><span class="icon icon-lg" style="--icon:url('assets/phosphor-icons/SVGs/bold/users-three-bold.svg')"></span></div><div><div class="num hero">~90%</div><div class="label">UAE residents</div></div><p class="ctx" style="margin:0;">of UAE-event purchases — the steady base</p></div>
+      <div class="card card-haze feature" style="flex:1;"><div class="card-top"><span class="icon icon-lg" style="--icon:url('assets/phosphor-icons/SVGs/bold/airplane-takeoff-bold.svg')"></span></div><div><div class="num hero">+136%</div><div class="label">International</div></div><p class="ctx" style="margin:0;">tourist purchases / day, Rec 2 vs Rec 1</p></div>
+    </div>
+  </div>
+  <div class="foot">Locals carry the volume. Tourists carry the growth. Right window to restart tourist-targeted ads.</div>
+</section>

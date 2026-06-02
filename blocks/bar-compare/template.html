@@ -1,0 +1,32 @@
+<!-- BLOCK: bar-compare
+     PURPOSE: Compare a single metric across 4 windows with CSS bars + callouts.
+     THEMES: theme-sabbath (default), theme-haze
+     SLOTS:
+       {kicker} optional eyebrow
+       {headline} the assertion
+       {lead} supporting sentence
+       {bars} 4 × { label, value, height% }; mark hero bar class="bar-hi"
+       {callouts} 2-3 × { num, ctx }
+     DENSITY: bars left ~62%, callout cards right ~38%. Annotate value on each bar.
+     NOTE: pure CSS bars (no Chart.js) — reliable in print/PDF. -->
+<section class="slide theme-sabbath">
+  <div class="head">
+    <div class="kicker">Revenue Per Day · AED</div>
+    <h2 class="headline lg">Revenue curve — still climbing</h2>
+    <p class="lead">Average revenue per day across the four windows. May leads the entire 2026 season.</p>
+  </div>
+
+  <div class="fill" style="display:flex; gap:48px; align-items:flex-end;">
+    <div style="flex:1.6 1 0; display:flex; align-items:flex-end; gap:40px; height:100%; padding-bottom:8px;">
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:14px; height:100%; justify-content:flex-end;"><div class="num" style="font-size:30px;">1.22M</div><div style="width:100%; height:80%; background:var(--accent); border-radius:14px 14px 0 0;"></div><div class="label">Pre-Conflict</div></div>
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:14px; height:100%; justify-content:flex-end;"><div class="num" style="font-size:30px;">0.28M</div><div style="width:100%; height:18%; background:rgba(121,226,255,.35); border-radius:14px 14px 0 0;"></div><div class="label">Conflict Peak</div></div>
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:14px; height:100%; justify-content:flex-end;"><div class="num" style="font-size:30px;">0.52M</div><div style="width:100%; height:34%; background:rgba(121,226,255,.35); border-radius:14px 14px 0 0;"></div><div class="label">Recovery 1</div></div>
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:14px; height:100%; justify-content:flex-end;"><div class="num" style="font-size:30px;color:var(--accent);">1.28M</div><div style="width:100%; height:84%; background:var(--accent); border-radius:14px 14px 0 0;"></div><div class="label">Recovery 2</div></div>
+    </div>
+    <div style="flex:1 1 0; display:flex; flex-direction:column; gap:18px;">
+      <div class="card card-sabbath"><div class="num" style="font-size:44px;color:var(--accent);">+149%</div><p class="ctx" style="margin-top:0;">Recovery 2 vs Recovery 1 — revenue per day more than doubled in 30 days.</p></div>
+      <div class="card card-sabbath"><div class="num" style="font-size:44px;color:var(--accent);">+5%</div><p class="ctx" style="margin-top:0;">Recovery 2 above pre-conflict — 1.28M vs 1.22M AED / day.</p></div>
+      <div class="card card-sabbath"><div class="num" style="font-size:44px;color:var(--accent);">+351%</div><p class="ctx" style="margin-top:0;">Recovery 2 vs Conflict Peak — the floor is far behind us.</p></div>
+    </div>
+  </div>
+</section>

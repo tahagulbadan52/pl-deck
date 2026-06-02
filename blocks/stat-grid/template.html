@@ -1,0 +1,23 @@
+<!-- BLOCK: stat-grid
+     PURPOSE: Showcase 4-6 headline numbers in a filled card grid.
+     THEMES: theme-monday (default), theme-day
+     SLOTS: {kicker} {sub-label} {headline} ; {cards} 4-6 × { icon, label, num, delta?, ctx }
+     DENSITY: 3x2 = 6 cards; 2x2 = 4. Each card: icon BADGE top, big number middle,
+       delta/ctx bottom, faint .wm watermark. Never an icon-less or bare-icon stat. -->
+<section class="slide theme-monday">
+  <div class="head">
+    <div class="kicker">Platform</div>
+    <div class="subhead">At a glance · 2025 closed · 2026 confirmed</div>
+    <h2 class="headline lg">The Middle East's market leader —<br>now compounding through 2026</h2>
+  </div>
+  <div class="fill">
+    <div class="grid grid-3x2">
+      <div class="card card-haze feature"><span class="icon wm" style="--icon:url('assets/phosphor-icons/SVGs/bold/users-three-bold.svg')"></span><div class="card-top"><span class="icon-badge"><span class="icon" style="--icon:url('assets/phosphor-icons/SVGs/bold/users-three-bold.svg')"></span></span></div><div><div class="num hero">34 M+</div><div class="label">Visitors · 2025</div></div><div class="delta up">+31% Year-on-year</div></div>
+      <div class="card card-haze feature"><span class="icon wm" style="--icon:url('assets/phosphor-icons/SVGs/bold/chart-line-bold.svg')"></span><div class="card-top"><span class="icon-badge"><span class="icon" style="--icon:url('assets/phosphor-icons/SVGs/bold/chart-line-bold.svg')"></span></span></div><div><div class="num hero">130 M+</div><div class="label">Page views · 2025</div></div><div class="delta up">+20% Year-on-year</div></div>
+      <div class="card card-haze feature"><span class="icon wm" style="--icon:url('assets/phosphor-icons/SVGs/bold/ticket-bold.svg')"></span><div class="card-top"><span class="icon-badge"><span class="icon" style="--icon:url('assets/phosphor-icons/SVGs/bold/ticket-bold.svg')"></span></span></div><div><div class="num hero">10 M+</div><div class="label">Tickets sold · 2025</div></div><div class="delta up">+38% Year-on-year</div></div>
+      <div class="card card-haze feature"><span class="icon wm" style="--icon:url('assets/phosphor-icons/SVGs/bold/microphone-stage-bold.svg')"></span><div class="card-top"><span class="icon-badge"><span class="icon" style="--icon:url('assets/phosphor-icons/SVGs/bold/microphone-stage-bold.svg')"></span></span></div><div><div class="num hero">7,400+</div><div class="label">Events &amp; experiences</div></div><div class="delta up">+45% Year-on-year</div></div>
+      <div class="card card-haze feature"><span class="icon wm" style="--icon:url('assets/phosphor-icons/SVGs/bold/currency-circle-dollar-bold.svg')"></span><div class="card-top"><span class="icon-badge"><span class="icon" style="--icon:url('assets/phosphor-icons/SVGs/bold/currency-circle-dollar-bold.svg')"></span></span></div><div><div class="num hero">449 AED</div><div class="label">AOV · May 15 window</div></div><div class="ctx">Held vs 452 AED pre-conflict</div></div>
+      <div class="card card-haze feature"><span class="icon wm" style="--icon:url('assets/phosphor-icons/SVGs/bold/arrows-out-bold.svg')"></span><div class="card-top"><span class="icon-badge"><span class="icon" style="--icon:url('assets/phosphor-icons/SVGs/bold/arrows-out-bold.svg')"></span></span></div><div><div class="num hero">2.25</div><div class="label">Pages per session</div></div><div class="delta up">+24% vs pre-conflict</div></div>
+    </div>
+  </div>
+</section>

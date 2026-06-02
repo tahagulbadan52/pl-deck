@@ -1,0 +1,265 @@
+/* ============================================================================
+   DECK BASE — shared foundation consumed by every presentation block.
+   Pairs with tokens.css. A block template is just semantic HTML; all visual
+   styling lives here so blocks stay portable and re-theme from tokens.
+
+   THEME MODEL (matches the approved reference deck):
+     .theme-haze    purple bg   · cyan text     · lime accent   · dark cards
+     .theme-monday  cyan bg     · purple text   · lime accent   · purple cards
+     .theme-day     lime bg     · purple text   · dark accent   · purple cards
+     .theme-sabbath near-black  · white text    · cyan accent   · outline cards
+   ========================================================================= */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ---- Slide canvas -------------------------------------------------------- */
+.slide {
+  position: relative;
+  width: var(--slide-w);
+  height: var(--slide-h);
+  padding: var(--slide-pad);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  overflow: hidden;
+}
+
+/* ---- Themes -------------------------------------------------------------- */
+.theme-haze    { --bg: var(--pl-haze);    --text: var(--pl-monday); --accent: var(--pl-day);     --muted: rgba(121,226,255,.72); }
+.theme-monday  { --bg: var(--pl-monday);  --text: var(--pl-haze);   --accent: var(--pl-day);     --muted: rgba(126,5,232,.66); }
+.theme-day     { --bg: var(--pl-day);     --text: var(--pl-haze);   --accent: var(--pl-sabbath); --muted: rgba(126,5,232,.62); }
+.theme-sabbath { --bg: var(--pl-black);   --text: var(--pl-white);  --accent: var(--pl-monday);  --muted: rgba(121,226,255,.85); }
+
+/* ---- Typography ---------------------------------------------------------- */
+.kicker {
+  font-family: var(--font-head);
+  font-size: var(--fs-kicker);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text);
+}
+/* Kickers are OPTIONAL. Add .no-kicker on .slide to hide any .kicker. */
+.slide.no-kicker .kicker { display: none; }
+
+.subhead {
+  font-family: var(--font-body);
+  font-size: var(--fs-subhead);
+  font-weight: 700;
+  color: var(--text);
+}
+
+.headline {
+  font-family: var(--font-head);
+  font-size: var(--fs-headline);
+  font-weight: 700;
+  line-height: 0.98;
+  text-transform: uppercase;
+  color: var(--text);
+}
+.headline.xl { font-size: 92px; }
+.headline.lg { font-size: 76px; }
+
+.lead {
+  font-size: var(--fs-body);
+  line-height: 1.35;
+  color: var(--text);
+  max-width: 60ch;
+}
+.caption { font-size: var(--fs-caption); color: var(--muted); }
+.foot {
+  position: absolute;
+  left: var(--slide-pad); bottom: 40px; right: var(--slide-pad);
+  font-size: var(--fs-caption); color: var(--muted);
+}
+
+/* ---- Numbers & deltas ---------------------------------------------------- */
+.num {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: var(--fs-card-num);
+  line-height: 0.95;
+}
+.num.hero { font-size: var(--fs-hero-num); }
+.delta {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: var(--fs-label);
+  color: var(--accent);
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.delta.up::before  { content: "▲"; font-size: 0.8em; }
+.delta.down::before{ content: "▽"; font-size: 0.8em; }
+
+/* ---- Pills (kicker pills + tag row) ------------------------------------- */
+.pill {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--font-head); font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.01em;
+  font-size: var(--fs-label);
+  padding: 14px 28px;
+  border-radius: var(--pill-radius);
+  border: 2.5px solid var(--text);
+  color: var(--text);
+}
+.pill.solid { background: var(--text); color: var(--bg); border-color: var(--text); }
+.pill-row { display: flex; flex-wrap: wrap; gap: var(--gap-sm); }
+
+/* ---- Cards --------------------------------------------------------------- */
+.card {
+  border-radius: var(--card-radius);
+  padding: 44px;
+  display: flex; flex-direction: column; gap: 16px;
+  position: relative; overflow: hidden;
+}
+/* Watermark — a big faint copy of the card's icon, bottom-right. Fills the dead
+   space in sparse cards so a box is never >55% empty. Always sits BEHIND content. */
+.card .wm {
+  position: absolute; right: -18px; bottom: -22px;
+  width: 230px; height: 230px; opacity: .12; z-index: 0; pointer-events: none;
+}
+.card.feature > *:not(.wm) { position: relative; z-index: 1; }
+/* FILLED CARD — the default for any card that stretches tall in a grid.
+   Three regions distribute top→bottom so the vertical centre is never empty:
+   icon row (top) · content (middle) · tag/anchor (bottom). */
+.card.feature { justify-content: space-between; gap: 20px; }
+/* .center — for cards whose content would otherwise gap (icon + text only, or
+   short feature cards). Clusters the stack with balanced padding so a tall card
+   reads as full, never as a hole between icon and text. */
+.card.feature.center { justify-content: center; gap: 22px; }
+.card-top { display: flex; align-items: flex-start; justify-content: space-between; }
+.card-top .idx { font-family: var(--font-head); font-weight: 700; font-size: 48px; opacity: .3; line-height: 1; }
+/* Icons inside cards take the brand accent, flipped on light card grounds */
+.card .icon { color: var(--accent); }
+.card-haze .icon, .card-deep .icon, .card-sabbath .icon { color: var(--pl-day); }
+.card-monday .icon, .card-day .icon { color: var(--pl-haze); }
+
+/* Icon BADGE — a solid accent chip with the icon knocked out. Use this for the
+   primary card icon so outline icons never read thin or "light". On dark/purple
+   cards the chip is lime with a dark icon; on light cards it is purple with a
+   white icon — always high-contrast and weighty. */
+.icon-badge { display: inline-flex; align-items: center; justify-content: center;
+  width: 84px; height: 84px; border-radius: 20px; flex: 0 0 auto; background: var(--pl-haze); }
+.icon-badge .icon { width: 46px; height: 46px; color: #fff; }
+.card-haze .icon-badge, .card-deep .icon-badge, .card-sabbath .icon-badge { background: var(--pl-day); }
+.card-haze .icon-badge .icon, .card-deep .icon-badge .icon, .card-sabbath .icon-badge .icon { color: var(--pl-sabbath); }
+.icon-badge.sm { width: 60px; height: 60px; border-radius: 15px; }
+.icon-badge.sm .icon { width: 32px; height: 32px; }
+/* Bottom anchor chip — contrasting, so it reads as designed, not forgotten */
+.tag {
+  align-self: flex-start; display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-head); font-weight: 700; text-transform: uppercase;
+  font-size: var(--fs-tag); letter-spacing: .02em; padding: 13px 24px;
+  border-radius: var(--pill-radius); background: var(--accent); color: var(--pl-sabbath);
+}
+.card-day .tag, .card-monday .tag { background: var(--pl-haze); color: var(--pl-white); }
+/* Icon tiles — turn a short list into a filled, visual 2-col grid */
+.tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.tile { display: flex; align-items: center; gap: 18px; padding: 22px 24px; border-radius: 16px;
+  background: rgba(0,0,0,.18); font-size: var(--fs-label); font-weight: 600; }
+.card-sabbath .tile, .card-deep .tile, .card-haze .tile { background: rgba(255,255,255,.08); }
+.card-haze    { background: var(--pl-haze);    color: var(--pl-monday); }
+.card-deep    { background: var(--pl-deep);    color: var(--pl-monday); }
+.card-sabbath { background: var(--pl-sabbath); color: var(--pl-white);  }
+.card-monday  { background: var(--pl-monday);  color: var(--pl-sabbath);}
+.card-day     { background: var(--pl-day);     color: var(--pl-sabbath);}
+/* Outline cards inherit the slide text color for border + content */
+.card-outline { background: transparent; border: 3px solid var(--text); color: var(--text); }
+
+.card .label { font-family: var(--font-body); font-weight: 700; font-size: var(--fs-label); }
+.card .num   { color: inherit; }
+/* On purple/dark cards, numbers pop cyan; on light cards they stay readable */
+.card-haze .num, .card-deep .num, .card-sabbath .num { color: var(--pl-monday); }
+.card-haze .delta, .card-deep .delta, .card-sabbath .delta { color: var(--pl-day); }
+.card .ctx   { font-family: var(--font-body); font-size: var(--fs-ctx); line-height: 1.3; opacity: .9; margin-top: auto; }
+
+/* ---- Grids --------------------------------------------------------------- */
+.grid { display: grid; gap: var(--gap); }
+.grid-2 { grid-template-columns: repeat(2,1fr); }
+.grid-3 { grid-template-columns: repeat(3,1fr); }
+.grid-4 { grid-template-columns: repeat(4,1fr); }
+.grid-3x2 { grid-template-columns: repeat(3,1fr); grid-template-rows: repeat(2,1fr); }
+.grid-2x2 { grid-template-columns: repeat(2,1fr); grid-template-rows: repeat(2,1fr); }
+
+/* .fill lets a body region consume remaining vertical space */
+.fill { flex: 1 1 auto; min-height: 0; }
+.fill .grid { height: 100%; }
+
+/* ---- Header block (kicker + subhead + headline + lead) ------------------ */
+.head { display: flex; flex-direction: column; gap: 12px; }
+.head .lead { margin-top: 8px; }
+
+/* ---- Tables (data-table / timeline / funnel / channels) ----------------- */
+.pl-table { width: 100%; border-collapse: collapse; font-family: var(--font-body); }
+.pl-table th {
+  font-family: var(--font-head); font-weight: 700; text-transform: uppercase;
+  font-size: var(--fs-label); text-align: left;
+  color: var(--text); padding: 18px 20px;
+}
+.pl-table td { font-size: var(--fs-body); padding: 22px 20px; color: var(--text); border-top: 2px solid var(--text); }
+.pl-table tr.row-head td, .pl-table td.bold { font-family: var(--font-head); font-weight: 700; text-transform: uppercase; }
+.pl-table .row-hi td { background: var(--accent); color: var(--pl-sabbath); border-color: var(--accent); }
+.pl-table .pos { color: var(--accent); font-weight: 700; }
+.pl-table .neg { opacity: .6; font-weight: 700; }
+/* rounded outline wrapper used on the curve / timeline tables */
+.table-wrap { border: 3px solid var(--text); border-radius: var(--card-radius); overflow: hidden; }
+.table-wrap .pl-table td:first-child { padding-left: 28px; }
+
+/* ---- Icons (phosphor, masked, colored by currentColor) ------------------ */
+.icon {
+  display: inline-block; width: 48px; height: 48px;
+  -webkit-mask: var(--icon) center / contain no-repeat;
+  mask: var(--icon) center / contain no-repeat;
+  background-color: currentColor; flex-shrink: 0;
+}
+.icon-sm { width: 28px; height: 28px; }
+.icon-lg { width: 72px; height: 72px; }
+.icon-xl { width: 104px; height: 104px; }
+
+/* ---- Heatmap matrix (a bespoke data layout, not a table) ----------------- */
+.heatmap { display: grid; grid-template-columns: 220px 1fr 1fr 1fr;
+  grid-template-rows: auto repeat(3, 1fr); gap: 14px; width: 100%; height: 100%; }
+.hm-h  { display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-head); font-weight: 700; text-transform: uppercase;
+  font-size: 20px; color: var(--text); }
+.hm-rl { display: flex; align-items: center; padding-right: 12px;
+  font-family: var(--font-head); font-weight: 700; text-transform: uppercase;
+  font-size: 22px; color: var(--text); }
+.hm-cell { border-radius: 16px; padding: 24px; display: flex; align-items: center;
+  font-size: 20px; font-weight: 600; line-height: 1.25; }
+.hm-0 { background: rgba(255,255,255,.06); color: var(--muted); justify-content: center; font-size: 30px; }
+.hm-1 { background: var(--pl-deep);   color: #fff; }
+.hm-2 { background: var(--pl-haze);   color: #fff; }
+.hm-3 { background: var(--pl-monday); color: var(--pl-sabbath); }
+.hm-4 { background: var(--pl-day);     color: var(--pl-sabbath); font-weight: 700; }
+.hm-legend { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+.hm-legend .k { display: inline-flex; align-items: center; gap: 10px; font-size: 18px; }
+.hm-legend .sw { width: 22px; height: 22px; border-radius: 6px; }
+
+/* ---- Checklist ----------------------------------------------------------- */
+.checklist { list-style: none; display: flex; flex-direction: column; gap: 24px; }
+.checklist li { display: flex; gap: 18px; align-items: flex-start; font-size: var(--fs-body); line-height: 1.3; }
+.checklist li::before { content: "✓"; font-family: var(--font-head); font-weight: 700; color: var(--accent); font-size: 1.1em; }
+
+/* ---- Image placeholder --------------------------------------------------- */
+.img-placeholder {
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  border: 3px dashed var(--muted); border-radius: var(--card-radius);
+  padding: 32px; color: var(--muted);
+}
+.img-placeholder .label { font-family: var(--font-head); font-size: 14px; font-weight: 700; letter-spacing: .1em; margin-bottom: 12px; }
+.img-placeholder .prompt { font-size: 20px; line-height: 1.4; max-width: 80%; }
+.img-placeholder .size { font-size: 13px; font-family: monospace; opacity: .7; margin-top: 10px; }
+
+/* ---- Deck shell + scaling (for the preview/composed deck) --------------- */
+.slide-wrapper { width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; background: #0a0a0a; }
+#slideContainer { transform-origin: center center; }
+.slide-counter { position: absolute; right: 28px; bottom: 24px; font-size: 14px; color: var(--muted); font-family: var(--font-body); }
+
+@media print {
+  .slide { page-break-after: always; break-after: page; }
+  .slide-counter { display: none; }
+}

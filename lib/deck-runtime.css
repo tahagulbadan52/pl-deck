@@ -1,0 +1,25 @@
+/* ============================================================================
+   DECK RUNTIME — the navigable, self-contained presentation shell.
+   Include in EVERY generated deck, AFTER tokens.css + deck-base.css.
+   Pairs with deck-runtime.js. One slide visible at a time, arrow-key nav,
+   auto-scale to the viewport; print = all slides stacked at true 1920x1080.
+   ========================================================================= */
+body { margin: 0; background: #0a0a0a; overflow: hidden; font-family: var(--font-body); }
+.slide-wrapper { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; }
+#slideContainer { position: relative; width: 1920px; height: 1080px; transform-origin: center center; }
+.slide-holder { position: absolute; inset: 0; opacity: 0; pointer-events: none; transition: opacity var(--fade); }
+.slide-holder.active { opacity: 1; pointer-events: auto; }
+.slide-holder .slide { position: absolute; inset: 0; }
+.slide-counter { position: fixed; right: 24px; bottom: 18px; color: rgba(255,255,255,.6); font-size: 14px; z-index: 10; }
+/* Cover logo wrapper — inline PL SVGs ship with hardcoded 1000px dims; this
+   constrains them. Always wrap an inlined logo in .cover-logo. */
+.cover-logo { width: 84px; flex: 0 0 auto; }
+.cover-logo svg { width: 100%; height: auto; display: block; }
+@media print {
+  body { overflow: visible; }
+  .slide-wrapper { position: static; display: block; }
+  #slideContainer { transform: none !important; width: 1920px; height: auto; }
+  .slide-holder { position: relative; inset: auto; opacity: 1 !important; page-break-after: always; break-after: page; }
+  .slide-holder .slide { position: relative; inset: auto; }
+  .slide-counter { display: none; }
+}
