@@ -1,0 +1,484 @@
+{
+  "version": 1,
+  "_doc": {
+    "purpose": "Machine-readable block catalog. Single source for: (1) the LLM's menu when composing a deck-spec, (2) the deck-spec validator, (3) the design-system gallery. Generated/maintained alongside blocks/<id>/template.html and block-catalog.md.",
+    "slotTypes": {
+      "string": "short single-line text; respect max (chars)",
+      "text": "multi-line body copy; respect max (chars)",
+      "icon": "a phosphor BOLD icon name without the -bold suffix, e.g. 'trend-up'. Must exist in assets/phosphor-icons/SVGs/bold/",
+      "image": "{ query?, prompt?, source?: 'pexels'|'pixabay'|'ai', url?, dims } — filled by the image subsystem; rendered with .img-fill brand-tint",
+      "boolean": "true/false toggle",
+      "array": "repeated items; honor min/max; each item follows its 'item' schema",
+      "enum": "one of 'values'"
+    },
+    "themes": ["theme-haze", "theme-monday", "theme-day", "theme-sabbath"],
+    "rules": "Char limits are the presentation font-floor proxy: if content exceeds max, shorten content — never shrink type. Kickers are optional everywhere kickerSupported=true (omit to render no-kicker). Primary card icons always render in an .icon-badge; watermarks are added by the assembler. See rules.json / SKILL.md."
+  },
+  "blocks": [
+    {
+      "id": "cover-hero",
+      "purpose": "Opening slide. Giant headline + context pills + tag row + optional hero icon.",
+      "defaultTheme": "theme-sabbath",
+      "themes": ["theme-haze", "theme-monday", "theme-sabbath"],
+      "kickerSupported": true,
+      "ref": "1",
+      "slots": {
+        "headline": { "type": "string", "max": 40, "help": "2-line allowed via <br>" },
+        "descender": { "type": "string", "max": 60, "optional": true },
+        "subtitle": { "type": "text", "max": 120, "optional": true },
+        "pills": { "type": "array", "max": 2, "optional": true, "item": { "type": "string", "max": 24 }, "help": "outline pills, top-right (the kicker)" },
+        "tags": { "type": "array", "max": 4, "optional": true, "item": { "type": "string", "max": 28 }, "help": "solid pills, bottom row" },
+        "heroIcon": { "type": "icon", "optional": true },
+        "logo": { "type": "enum", "values": ["icon_white", "icon_blue"], "optional": true, "help": "defaults to white on dark/haze, blue on light" }
+      }
+    },
+    {
+      "id": "section-divider",
+      "purpose": "Section break between chapters. Big statement, optional side image.",
+      "defaultTheme": "theme-haze",
+      "themes": ["theme-haze", "theme-sabbath"],
+      "kickerSupported": true,
+      "ref": "19, 22",
+      "slots": {
+        "kicker": { "type": "string", "max": 28, "optional": true },
+        "title": { "type": "string", "max": 48, "help": "headline xl; 2-line via <br>" },
+        "intro": { "type": "text", "max": 160, "optional": true },
+        "image": { "type": "image", "optional": true, "dims": "1200x1400", "help": "optional right-side panel" }
+      }
+    },
+    {
+      "id": "stat-grid",
+      "purpose": "Showcase 4-6 headline numbers in a filled card grid (3x2 or 2x2).",
+      "defaultTheme": "theme-monday",
+      "themes": ["theme-monday", "theme-day"],
+      "kickerSupported": true,
+      "ref": "2",
+      "slots": {
+        "kicker": { "type": "string", "max": 28, "optional": true },
+        "subLabel": { "type": "string", "max": 60, "optional": true },
+        "headline": { "type": "string", "max": 64 },
+        "cards": { "type": "array", "min": 4, "max": 6, "item": {
+          "icon": { "type": "icon" },
+          "label": { "type": "string", "max": 40 },
+          "num": { "type": "string", "max": 12 },
+          "delta": { "type": "string", "max": 16, "optional": true },
+          "ctx": { "type": "string", "max": 90, "optional": true }
+        }}
+      }
+    },
+    {
+      "id": "segment-row",
+      "purpose": "3-4 parallel segments as tall filled feature cards.",
+      "defaultTheme": "theme-monday",
+      "themes": ["theme-monday", "theme-day"],
+      "kickerSupported": true,
+      "ref": "3",
+      "slots": {
+        "kicker": { "type": "string", "max": 28, "optional": true },
+        "headline": { "type": "string", "max": 64 },
+        "lead": { "type": "text", "max": 200, "optional": true },
+        "cards": { "type": "array", "min": 3, "max": 4, "item": {
+          "icon": { "type": "icon" },
+          "title": { "type": "string", "max": 24 },
+          "desc": { "type": "text", "max": 110 },
+          "tag": { "type": "string", "max": 22, "optional": true }
+        }}
+      }
+    },
+    {
+      "id": "hero-stat-row",
+      "purpose": "One dominant stat (filled card) + 2-3 supporting deltas (outline cards).",
+      "defaultTheme": "theme-day",
+      "themes": ["theme-day", "theme-monday"],
+      "kickerSupported": true,
+      "ref": "4, 9",
+      "slots": {
+        "kicker": { "type": "string", "max": 28, "optional": true },
+        "subLabel": { "type": "string", "max": 60, "optional": true },
+        "headline": { "type": "string", "max": 64 },
+        "lead": { "type": "text", "max": 220, "optional": true },
+        "hero": { "type": "object", "item": {
+          "icon": { "type": "icon" },
+          "label": { "type": "string", "max": 40 },
+          "num": { "type": "string", "max": 12 },
+          "ctx": { "type": "string", "max": 80, "optional": true }
+        }},
+        "supporting": { "type": "array", "min": 2, "max": 3, "item": {
+          "icon": { "type": "icon" },
+          "label": { "type": "string", "max": 40 },
+          "num": { "type": "string", "max": 12 }
+        }},
+        "foot": { "type": "text", "max": 200, "optional": true }
+      }
+    },
+    {
+      "id": "methodology-windows",
+      "purpose": "Define 3-4 comparison windows / methodology with icon-led cards.",
+      "defaultTheme": "theme-sabbath",
+      "themes": ["theme-sabbath", "theme-haze"],
+      "kickerSupported": true,
+      "ref": "5",
+      "slots": {
+        "kicker": { "type": "string", "max": 28, "optional": true },
+        "headline": { "type": "string", "max": 64 },
+        "lead": { "type": "text", "max": 200, "optional": true },
+        "windows": { "type": "array", "min": 3, "max": 4, "item": {
+          "icon": { "type": "icon" },
+          "name": { "type": "string", "max": 24 },
+          "dates": { "type": "string", "max": 32 },
+          "descriptor": { "type": "string", "max": 30, "help": "rendered as a tag chip" }
+        }},
+        "notes": { "type": "text", "max": 240, "optional": true, "help": "data-source caption" }
+      }
+    },
+    {
+      "id": "timeline-table",
+      "purpose": "Dated sequence of events; one current row highlighted.",
+      "defaultTheme": "theme-sabbath",
+      "themes": ["theme-sabbath", "theme-haze"],
+      "kickerSupported": true,
+      "ref": "6",
+      "slots": {
+        "kicker": { "type": "string", "max": 28, "optional": true },
+        "subLabel": { "type": "string", "max": 60, "optional": true },
+        "headline": { "type": "string", "max": 64 },
+        "lead": { "type": "text", "max": 200, "optional": true },
+        "rows": { "type": "array", "min": 3, "max": 6, "item": {
+          "date": { "type": "string", "max": 18 },
+          "event": { "type": "string", "max": 40 },
+          "impact": { "type": "text", "max": 70 },
+          "highlight": { "type": "boolean", "optional": true }
+        }},
+        "foot": { "type": "text", "max": 200, "optional": true }
+      }
+    },
+    {
+      "id": "layer-columns",
+      "purpose": "Explain 2-3 forces / concepts side by side as filled cards.",
+      "defaultTheme": "theme-haze",
+      "themes": ["theme-haze", "theme-sabbath"],
+      "kickerSupported": true,
+      "ref": "7",
+      "slots": {
+        "kicker": { "type": "string", "max": 28, "optional": true },
+        "headline": { "type": "string", "max": 64 },
+        "lead": { "type": "text", "max": 200, "optional": true },
+        "columns": { "type": "array", "min": 2, "max": 3, "item": {
+          "icon": { "type": "icon" },
+          "tag": { "type": "string", "max": 24 },
+          "title": { "type": "string", "max": 24 },
+          "body": { "type": "text", "max": 140 }
+        }}
+      }
+    },
+    {
+      "id": "data-table",
+      "purpose": "Comparison table with column headers and ONE highlighted hero row.",
+      "defaultTheme": "theme-haze",
+      "themes": ["theme-haze", "theme-sabbath"],
+      "kickerSupported": true,
+      "ref": "8",
+      "slots": {
+        "kicker": { "type": "string", "max": 28, "optional": true },
+        "subLabel": { "type": "string", "max": 60, "optional": true },
+        "headline": { "type": "string", "max": 64 },
+        "lead": { "type": "text", "max": 200, "optional": true },
+        "columns": { "type": "array", "min": 2, "max": 6, "item": { "type": "string", "max": 18 } },
+        "rows": { "type": "array", "min": 2, "max": 6, "item": {
+          "cells": { "type": "array", "item": { "type": "string", "max": 40 } },
+          "highlight": { "type": "boolean", "optional": true },
+          "newTag": { "type": "boolean", "optional": true }
+        }},
+        "foot": { "type": "text", "max": 200, "optional": true }
+      }
+    },
+    {
+      "id": "heatmap-matrix",
+      "purpose": "2-axis colour-graded matrix (likelihood x impact, effort x value). Use instead of a flat table for 2-axis data.",
+      "defaultTheme": "theme-sabbath",
+      "themes": ["theme-sabbath", "theme-haze"],
+      "kickerSupported": true,
+      "ref": "bespoke",
+      "slots": {
+        "kicker": { "type": "string", "max": 28, "optional": true },
+        "headline": { "type": "string", "max": 64 },
+        "lead": { "type": "text", "max": 160, "optional": true },
+        "colHeads": { "type": "array", "min": 3, "max": 3, "item": { "type": "string", "max": 16 } },
+        "rowLabels": { "type": "array", "min": 3, "max": 3, "item": { "type": "string", "max": 16 } },
+        "cells": { "type": "array", "min": 9, "max": 9, "help": "row-major 3x3", "item": {
+          "level": { "type": "enum", "values": [0, 1, 2, 3, 4], "help": "0=empty/dash, 4=hottest/top-priority" },
+          "text": { "type": "string", "max": 80 }
+        }},
+        "legend": { "type": "array", "max": 4, "optional": true, "item": {
+          "level": { "type": "enum", "values": [1, 2, 3, 4] },
+          "label": { "type": "string", "max": 18 }
+        }}
+      }
+    },
+    {
+      "id": "bar-compare",
+      "purpose": "Compare one metric across 3-5 windows with CSS bars + callouts.",
+      "defaultTheme": "theme-sabbath",
+      "themes": ["theme-sabbath", "theme-haze"],
+      "kickerSupported": true,
+      "ref": "10",
+      "slots": {
+        "kicker": { "type": "string", "max": 28, "optional": true },
+        "headline": { "type": "string", "max": 64 },
+        "lead": { "type": "text", "max": 200, "optional": true },
+        "bars": { "type": "array", "min": 3, "max": 5, "item": {
+          "label": { "type": "string", "max": 18 },
+          "value": { "type": "string", "max": 12 },
+          "heightPct": { "type": "number", "help": "0-100, relative bar height" },
+          "hero": { "type": "boolean", "optional": true }
+        }},
+        "callouts": { "type": "array", "max": 3, "optional": true, "item": {
+          "num": { "type": "string", "max": 12 },
+          "ctx": { "type": "text", "max": 90 }
+        }}
+      }
+    },
+    {
+      "id": "quality-stats",
+      "purpose": "3-4 quality/intent stat cards, delta-forward.",
+      "defaultTheme": "theme-day",
+      "themes": ["theme-day", "theme-monday"],
+      "kickerSupported": true,
+      "ref": "11, 16",
+      "slots": {
+        "kicker": { "type": "string", "max": 28, "optional": true },
+        "subLabel": { "type": "string", "max": 60, "optional": true },
+        "headline": { "type": "string", "max": 64 },
+        "lead": { "type": "text", "max": 200, "optional": true },
+        "cards": { "type": "array", "min": 3, "max": 4, "item": {
+          "icon": { "type": "icon" },
+          "num": { "type": "string", "max": 12 },
+          "label": { "type": "string", "max": 40 },
+          "ctx": { "type": "text", "max": 90 }
+        }}
+      }
+    },
+    {
+      "id": "funnel-table",
+      "purpose": "Full funnel — many metrics across windows with +/- delta columns.",
+      "defaultTheme": "theme-haze",
+      "themes": ["theme-haze", "theme-sabbath"],
+      "kickerSupported": true,
+      "ref": "12, 17",
+      "slots": {
+        "kicker": { "type": "string", "max": 28, "optional": true },
+        "subLabel": { "type": "string", "max": 60, "optional": true },
+        "headline": { "type": "string", "max": 64 },
+        "lead": { "type": "text", "max": 200, "optional": true },
+        "columns": { "type": "array", "min": 2, "max": 6, "item": { "type": "string", "max": 14 } },
+        "rows": { "type": "array", "min": 3, "max": 7, "item": {
+          "metric": { "type": "string", "max": 24 },
+          "cells": { "type": "array", "item": {
+            "value": { "type": "string", "max": 12 },
+            "tone": { "type": "enum", "values": ["pos", "neg", "neutral"], "optional": true }
+          }}
+        }},
+        "foot": { "type": "text", "max": 200, "optional": true }
+      }
+    },
+    {
+      "id": "split-audience",
+      "purpose": "Narrative + checklist on the left, stacked stat cards on the right.",
+      "defaultTheme": "theme-day",
+      "themes": ["theme-day", "theme-monday"],
+      "kickerSupported": true,
+      "ref": "13",
+      "slots": {
+        "kicker": { "type": "string", "max": 28, "optional": true },
+        "subLabel": { "type": "string", "max": 60, "optional": true },
+        "headline": { "type": "string", "max": 64 },
+        "lead": { "type": "text", "max": 200, "optional": true },
+        "checklist": { "type": "array", "max": 5, "optional": true, "item": { "type": "string", "max": 90 } },
+        "right": { "type": "array", "min": 1, "max": 2, "item": {
+          "icon": { "type": "icon" },
+          "num": { "type": "string", "max": 12 },
+          "label": { "type": "string", "max": 40 },
+          "ctx": { "type": "text", "max": 90 }
+        }},
+        "foot": { "type": "text", "max": 200, "optional": true }
+      }
+    },
+    {
+      "id": "rank-list",
+      "purpose": "Two columns of ranked rows (label ... delta), each with a header.",
+      "defaultTheme": "theme-haze",
+      "themes": ["theme-haze", "theme-sabbath"],
+      "kickerSupported": true,
+      "ref": "14, 15",
+      "slots": {
+        "kicker": { "type": "string", "max": 28, "optional": true },
+        "subLabel": { "type": "string", "max": 60, "optional": true },
+        "headline": { "type": "string", "max": 64 },
+        "lead": { "type": "text", "max": 160, "optional": true },
+        "columns": { "type": "array", "min": 2, "max": 2, "item": {
+          "head": { "type": "string", "max": 48 },
+          "rows": { "type": "array", "min": 3, "max": 6, "item": {
+            "label": { "type": "string", "max": 32 },
+            "delta": { "type": "string", "max": 12 }
+          }}
+        }}
+      }
+    },
+    {
+      "id": "summary-numbered",
+      "purpose": "4 numbered takeaways in a 2x2 grid.",
+      "defaultTheme": "theme-monday",
+      "themes": ["theme-monday", "theme-day", "theme-haze"],
+      "kickerSupported": true,
+      "ref": "18",
+      "slots": {
+        "kicker": { "type": "string", "max": 28, "optional": true },
+        "headline": { "type": "string", "max": 64 },
+        "cards": { "type": "array", "min": 4, "max": 4, "item": {
+          "icon": { "type": "icon" },
+          "no": { "type": "string", "max": 3 },
+          "title": { "type": "string", "max": 28 },
+          "body": { "type": "text", "max": 130 },
+          "tag": { "type": "string", "max": 24, "optional": true }
+        }}
+      }
+    },
+    {
+      "id": "case-study",
+      "purpose": "Single proof point with 2-3 metric cards + a note.",
+      "defaultTheme": "theme-day",
+      "themes": ["theme-day", "theme-sabbath"],
+      "kickerSupported": true,
+      "ref": "20",
+      "slots": {
+        "kicker": { "type": "string", "max": 40, "optional": true },
+        "title": { "type": "string", "max": 40 },
+        "lead": { "type": "text", "max": 200, "optional": true },
+        "cards": { "type": "array", "min": 2, "max": 3, "item": {
+          "icon": { "type": "icon" },
+          "num": { "type": "string", "max": 16 },
+          "label": { "type": "string", "max": 40 },
+          "ctx": { "type": "text", "max": 90 }
+        }},
+        "foot": { "type": "text", "max": 200, "optional": true }
+      }
+    },
+    {
+      "id": "channels-table",
+      "purpose": "Channel performance grid with two delta columns + a signal note.",
+      "defaultTheme": "theme-sabbath",
+      "themes": ["theme-sabbath", "theme-haze"],
+      "kickerSupported": true,
+      "ref": "21",
+      "slots": {
+        "kicker": { "type": "string", "max": 28, "optional": true },
+        "subLabel": { "type": "string", "max": 60, "optional": true },
+        "headline": { "type": "string", "max": 64 },
+        "lead": { "type": "text", "max": 160, "optional": true },
+        "rows": { "type": "array", "min": 3, "max": 6, "item": {
+          "channel": { "type": "string", "max": 24 },
+          "what": { "type": "string", "max": 40 },
+          "delta1": { "type": "string", "max": 10 },
+          "delta2": { "type": "string", "max": 10 },
+          "signal": { "type": "text", "max": 60 }
+        }},
+        "foot": { "type": "text", "max": 200, "optional": true }
+      }
+    },
+    {
+      "id": "service-checklist",
+      "purpose": "Service slide — 'how it works' checklist left, icon stats right.",
+      "defaultTheme": "theme-day",
+      "themes": ["theme-day", "theme-monday"],
+      "kickerSupported": true,
+      "ref": "24",
+      "slots": {
+        "kicker": { "type": "string", "max": 28, "optional": true },
+        "title": { "type": "string", "max": 40 },
+        "lead": { "type": "text", "max": 200, "optional": true },
+        "listTitle": { "type": "string", "max": 24 },
+        "checklist": { "type": "array", "min": 3, "max": 6, "item": { "type": "string", "max": 90 } },
+        "stats": { "type": "array", "min": 1, "max": 2, "item": {
+          "icon": { "type": "icon" },
+          "num": { "type": "string", "max": 12 },
+          "label": { "type": "string", "max": 40 },
+          "ctx": { "type": "text", "max": 90 }
+        }}
+      }
+    },
+    {
+      "id": "service-pillars",
+      "purpose": "Service slide — 4 numbered pillar cards in a 2x2 grid.",
+      "defaultTheme": "theme-monday",
+      "themes": ["theme-monday", "theme-day"],
+      "kickerSupported": true,
+      "ref": "26",
+      "slots": {
+        "kicker": { "type": "string", "max": 28, "optional": true },
+        "title": { "type": "string", "max": 40 },
+        "lead": { "type": "text", "max": 200, "optional": true },
+        "pillars": { "type": "array", "min": 4, "max": 4, "item": {
+          "icon": { "type": "icon" },
+          "label": { "type": "string", "max": 28, "help": "e.g. 'Pillar 01'" },
+          "title": { "type": "string", "max": 24 },
+          "desc": { "type": "text", "max": 110 }
+        }},
+        "foot": { "type": "text", "max": 200, "optional": true }
+      }
+    },
+    {
+      "id": "service-statpair",
+      "purpose": "Service slide — 2 hero deltas + a deliverables list.",
+      "defaultTheme": "theme-day",
+      "themes": ["theme-day", "theme-monday"],
+      "kickerSupported": true,
+      "ref": "27, 28, 29",
+      "slots": {
+        "kicker": { "type": "string", "max": 28, "optional": true },
+        "title": { "type": "string", "max": 40 },
+        "lead": { "type": "text", "max": 200, "optional": true },
+        "stats": { "type": "array", "min": 2, "max": 2, "item": {
+          "icon": { "type": "icon" },
+          "num": { "type": "string", "max": 12 },
+          "label": { "type": "string", "max": 40 },
+          "ctx": { "type": "text", "max": 90 }
+        }},
+        "listTitle": { "type": "string", "max": 24 },
+        "list": { "type": "array", "min": 2, "max": 5, "item": { "type": "string", "max": 90 } }
+      }
+    },
+    {
+      "id": "cta-nextsteps",
+      "purpose": "Closing CTA. Headline + 4 impact stats + contact + wordmark.",
+      "defaultTheme": "theme-haze",
+      "themes": ["theme-haze", "theme-sabbath"],
+      "kickerSupported": false,
+      "ref": "30",
+      "slots": {
+        "headline": { "type": "string", "max": 64 },
+        "lead": { "type": "text", "max": 220, "optional": true },
+        "stats": { "type": "array", "min": 3, "max": 4, "item": {
+          "icon": { "type": "icon" },
+          "num": { "type": "string", "max": 12 },
+          "label": { "type": "string", "max": 40 }
+        }},
+        "contactLabel": { "type": "string", "max": 24, "optional": true, "help": "e.g. 'Get in touch'" },
+        "email": { "type": "string", "max": 48, "optional": true },
+        "cities": { "type": "string", "max": 80, "optional": true },
+        "wordmark": { "type": "boolean", "optional": true, "help": "PL wordmark bottom-right; default true" }
+      }
+    },
+    {
+      "id": "closing",
+      "purpose": "Optional final thank-you slide.",
+      "defaultTheme": "theme-haze",
+      "themes": ["theme-haze", "theme-sabbath"],
+      "kickerSupported": false,
+      "ref": "31",
+      "slots": {
+        "headline": { "type": "string", "max": 48 },
+        "wordmark": { "type": "boolean", "optional": true, "help": "default true" }
+      }
+    }
+  ]
+}
