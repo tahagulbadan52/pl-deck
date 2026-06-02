@@ -5,8 +5,12 @@
    auto-scale to the viewport; print = all slides stacked at true 1920x1080.
    ========================================================================= */
 body { margin: 0; background: #0a0a0a; overflow: hidden; font-family: var(--font-body); }
-.slide-wrapper { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; }
-#slideContainer { position: relative; width: 1920px; height: 1080px; transform-origin: center center; }
+.slide-wrapper { position: fixed; inset: 0; overflow: hidden; background: #0a0a0a; }
+/* Absolute-centre + translate(-50%,-50%) scale() is the ONLY reliable way to
+   keep a 1920x1080 stage centred on every screen. Do NOT center with flexbox —
+   a transformed element wider than the viewport (the laptop case) won't center
+   and the deck drifts right. The JS sets transform = translate(-50%,-50%) scale(s). */
+#slideContainer { position: absolute; top: 50%; left: 50%; width: 1920px; height: 1080px; transform-origin: center center; }
 .slide-holder { position: absolute; inset: 0; opacity: 0; pointer-events: none; transition: opacity var(--fade); }
 .slide-holder.active { opacity: 1; pointer-events: auto; }
 .slide-holder .slide { position: absolute; inset: 0; }
@@ -18,7 +22,7 @@ body { margin: 0; background: #0a0a0a; overflow: hidden; font-family: var(--font
 @media print {
   body { overflow: visible; }
   .slide-wrapper { position: static; display: block; }
-  #slideContainer { transform: none !important; width: 1920px; height: auto; }
+  #slideContainer { position: static; top: auto; left: auto; transform: none !important; width: 1920px; height: auto; }
   .slide-holder { position: relative; inset: auto; opacity: 1 !important; page-break-after: always; break-after: page; }
   .slide-holder .slide { position: relative; inset: auto; }
   .slide-counter { display: none; }

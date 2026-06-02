@@ -195,6 +195,33 @@ deck-over-deck. The heatmap matrix is exactly this: it started as a one-off fix
 for a flat risk table and became a permanent block. That is how the library
 should keep expanding.
 
+### Images (real photos / visuals)
+
+1. **Host them, don't base64 them.** Photos/visuals are referenced by **hosted
+   URL** (Supabase Storage, Google Drive public link, or a stock CDN). Only fonts,
+   icons and logos are base64-inlined — never large photos (they bloat the file).
+2. **Always brand-tint.** Wrap every real image in `.img-fill` (a panel) or
+   `.bg-image` (full-bleed). Those classes push the photo toward greyscale and lay
+   a haze→deep→cyan gradient over it so any image reads on-brand. Raw, untinted
+   stock on these slides looks pasted-in — never ship it.
+   ```html
+   <div class="img-fill" style="flex:1 1 0;align-self:stretch;"><img src="HOSTED_URL" alt="…"></div>
+   ```
+3. **Stock-first, AI-fallback.** Most slots are generic moods (arena, skyline,
+   meeting) — fill them from a keyword stock library. For production use a
+   **Pexels or Pixabay API key** (curated, relevant, free, commercial-OK).
+   Keyless sources (e.g. loremflickr) work for quick tests but are unreliable —
+   a "cybersecurity" query once returned a cat. Use **AI generation**
+   (Higgsfield / nano-banana) only for specific or branded scenes stock can't supply.
+4. **Attribution:** internal/non-public decks need none. Public decks: follow the
+   source's terms (Unsplash requires credit; Pexels/Pixabay do not).
+5. **Manifest:** track each image as `{ slot, query, source, url, dims, alt }` so
+   it can be swapped, re-queried, or regenerated. The `.img-placeholder` block is
+   the fallback when no image exists yet — it already carries the prompt + dims.
+6. **Final delivery:** for a portable/offline artifact, run a bundle step that
+   downloads each remote image and base64-inlines it (the PDF export embeds them
+   automatically). Hosted while editing, inlined for sign-off.
+
 ### Deck assembly — the EXACT self-contained output (reproducible recipe)
 
 Following this section verbatim reproduces the current deck output byte-for-intent
@@ -308,7 +335,12 @@ inputs reproduce the same output in any folder.
   grids, tables, pills, tags, tiles, icons (`icon-lg`/`icon-xl`), checklist, heatmap.
 - `lib/deck-runtime.css` + `lib/deck-runtime.js` — the navigable deck shell
   (one slide at a time, arrow-key nav, viewport scaling, print = stacked). Inline
-  both in every deck.
+  both in every deck. **Centering rule:** the 1920×1080 stage is absolutely
+  positioned at `top/left:50%` and transformed with `translate(-50%,-50%) scale(s)`.
+  NEVER center the scaled stage with flexbox + bare `scale()` — a transformed
+  element wider than the viewport doesn't center on laptops and the deck drifts
+  right. Always read these two files (don't re-inline a hand-written copy) so the
+  fix can't regress.
 - `blocks/` — 23 slide blocks (see catalog, incl. `heatmap-matrix`).
   `scripts/build-gallery.sh` renders every block to `scripts/_shots/` for visual QA.
 
