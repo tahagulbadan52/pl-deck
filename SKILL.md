@@ -57,6 +57,10 @@ Only ask what you genuinely don't know — skip questions the user already answe
 
 7. **CTA** — What should the audience do after seeing this? (book a call, sign a contract, approve budget, etc.)
 
+8. **Contact email** — If a contact/CTA slide is included, ask which email (if
+   any) should be shown. NEVER guess, reuse another deck's address, or use the
+   user's own account email. If they don't provide one, omit the contact block.
+
 ### Step 3: Research & Enrich (if needed)
 
 Before generating, consider whether the content would benefit from:
@@ -875,10 +879,16 @@ Want me to adjust any slides? The HTML is still editable — just tell me what t
 
 ### CTA / Final Slide Rules
 
-- **Final slide hierarchy:** eyebrow label → big headline → supporting paragraph → impact-stat row → contact section (GET IN TOUCH + email) → **wordmark logo at the bottom** → cities line → confidentiality note.
+- **Final slide hierarchy:** big headline → supporting paragraph → impact-stat row → optional contact section (GET IN TOUCH + email) → **wordmark logo at the bottom**.
+- **NEVER auto-insert an email address.** Do not guess, reuse a previous deck's
+  email, or use the user's own account email. Ask during intake which email (if
+  any) should appear. If the user gives none, **omit the contact block entirely** —
+  do not invent a `marketing@…` or any placeholder address in the delivered deck.
+- **NO cities / location / "platinumlist.net · Dubai · …" footer.** This was wrong
+  (the city list is incomplete and not wanted). Do not add a cities line, an office
+  list, or a website footer to any slide. The wordmark is the only footer signature.
 - **Logo goes at the BOTTOM on the CTA slide, not the top.** Think of it as a signature, not a letterhead. Leave visual breathing room above it.
 - **Do NOT use `.cta-btn` styling on the final slide.** Buttons in a printed/presented deck are misleading — they imply interactivity that doesn't exist. Instead use MD Nichrome type + an arrow icon + contact line below it.
-- **Cities line is the second-to-last element**, before confidentiality. Format: `platinumlist.net · Dubai · Abu Dhabi · Riyadh · Cairo` at 16px, low opacity.
 
 ### Card Density Gate (MANDATORY pre-flight check before delivering any deck)
 

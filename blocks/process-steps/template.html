@@ -1,0 +1,42 @@
+<!-- BLOCK: process-steps
+     PURPOSE: "How it works / steps to start" — a bold intro panel on the left and
+       a vertical numbered stepper (connected circles) on the right, with an
+       optional CTA bar. Use for onboarding flows, how-to-engage, methodology steps.
+     THEMES: theme-sabbath (default), theme-haze
+     SLOTS:
+       {kicker} small accent eyebrow on the panel
+       {headline} 2-3 line headline; wrap the punch word in <span class="accent">
+       {lead} supporting line, pinned to the bottom of the panel
+       {conf} optional confidentiality / footer line in the panel
+       {steps} 3-5 × { num, title, desc }
+       {cta} optional { text, action } -> bottom CTA bar
+     DENSITY: .slide padding MUST be 0 so the left panel is edge-to-edge. The
+       accent (circles, kicker, accent word, CTA action) follows the theme accent,
+       so the colour scheme changes when you change the theme. -->
+<section class="slide theme-sabbath" style="padding:0;">
+  <div class="steps-layout">
+    <div class="steps-aside">
+      <div class="kicker">How to start</div>
+      <h2 class="headline lg" style="margin-top:24px;">Let's pick<br>your <span class="accent">package.</span></h2>
+      <p class="lead">Tell us your event and budget — we'll recommend the right tier and get creative into production fast.</p>
+      <div class="conf">Confidential · Platinumlist</div>
+    </div>
+    <div class="steps-main">
+      <ol class="stepper">
+        <li class="step">
+          <div class="step-rail"><div class="step-num">1</div><div class="step-connector"></div></div>
+          <div class="step-body"><div class="step-title">Choose your tier</div><div class="step-desc">Images · Images + Video · Custom + Strategy</div></div>
+        </li>
+        <li class="step">
+          <div class="step-rail"><div class="step-num">2</div><div class="step-connector"></div></div>
+          <div class="step-body"><div class="step-title">Kick-off &amp; brief</div><div class="step-desc">Share your event details, assets and goals</div></div>
+        </li>
+        <li class="step">
+          <div class="step-rail"><div class="step-num">3</div><div class="step-connector"></div></div>
+          <div class="step-body"><div class="step-title">We produce &amp; deliver</div><div class="step-desc">Creative built, reviewed and ready to run</div></div>
+        </li>
+      </ol>
+      <div class="steps-cta">Ready to begin? <span class="go">Reply to this proposal to book your kick-off.</span></div>
+    </div>
+  </div>
+</section>

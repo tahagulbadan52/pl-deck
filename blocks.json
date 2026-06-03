@@ -463,8 +463,7 @@
           "label": { "type": "string", "max": 40 }
         }},
         "contactLabel": { "type": "string", "max": 24, "optional": true, "help": "e.g. 'Get in touch'" },
-        "email": { "type": "string", "max": 48, "optional": true },
-        "cities": { "type": "string", "max": 80, "optional": true },
+        "email": { "type": "string", "max": 48, "optional": true, "help": "NEVER invent or guess. Include ONLY if the user explicitly provided an email; otherwise omit the whole contact block. No default." },
         "wordmark": { "type": "boolean", "optional": true, "help": "PL wordmark bottom-right; default true" }
       }
     },
@@ -478,6 +477,31 @@
       "slots": {
         "headline": { "type": "string", "max": 48 },
         "wordmark": { "type": "boolean", "optional": true, "help": "default true" }
+      }
+    },
+    {
+      "id": "process-steps",
+      "purpose": "How-it-works / steps-to-start: bold intro panel (left, edge-to-edge) + vertical numbered stepper (right) with connected circles, optional CTA bar. Use for onboarding, how-to-engage, or methodology steps.",
+      "defaultTheme": "theme-sabbath",
+      "themes": ["theme-sabbath", "theme-haze"],
+      "kickerSupported": true,
+      "ref": "new",
+      "render": { "slidePadding": 0, "help": "the .slide must have padding:0 so the left panel is edge-to-edge" },
+      "slots": {
+        "kicker": { "type": "string", "max": 28, "optional": true },
+        "headline": { "type": "string", "max": 40, "help": "2-3 lines; use <br> for breaks" },
+        "accentWord": { "type": "string", "max": 18, "optional": true, "help": "the punch word in the headline, rendered in the theme accent colour" },
+        "lead": { "type": "text", "max": 160, "optional": true, "help": "pinned to the bottom of the panel" },
+        "conf": { "type": "string", "max": 40, "optional": true, "help": "footer line in the panel, e.g. 'Confidential · Platinumlist'" },
+        "steps": { "type": "array", "min": 3, "max": 5, "item": {
+          "num": { "type": "string", "max": 2 },
+          "title": { "type": "string", "max": 28 },
+          "desc": { "type": "text", "max": 70 }
+        }},
+        "cta": { "type": "object", "optional": true, "item": {
+          "text": { "type": "string", "max": 24, "help": "e.g. 'Ready to begin?'" },
+          "action": { "type": "string", "max": 64, "help": "the accent-coloured call to action" }
+        }}
       }
     }
   ]

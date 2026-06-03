@@ -5,10 +5,11 @@
        {headline} action-oriented assertion
        {lead} supporting paragraph
        {stats} 4 × { icon, num, label }
-       {contact} GET IN TOUCH + email
+       {contact} OPTIONAL "Get in touch" + email. NEVER invent an email — only
+         include this if the user explicitly provided one; otherwise omit the
+         whole contact block.
        {wordmark} PL wordmark pinned near the bottom (signature, not letterhead)
-       {cities} platinumlist.net · Dubai · Abu Dhabi · Riyadh · Cairo
-     DENSITY: NO button styling. Logo at the BOTTOM. Stat cards icon-led + filled. -->
+     DENSITY: NO button styling. NO cities/location footer. Logo at the BOTTOM. -->
 <section class="slide theme-haze">
   <div class="head">
     <h2 class="headline lg">Capture the next 60 days with us</h2>
@@ -24,10 +25,10 @@
   </div>
   <div style="display:flex; justify-content:space-between; align-items:flex-end;">
     <div>
+      <!-- Contact block: include ONLY if the user supplied an email. Otherwise delete this div. -->
       <div class="subhead">Get in touch</div>
-      <div class="num" style="font-size:34px;">marketing@platinumlist.net</div>
+      <div class="num" style="font-size:34px;">[ contact email — ask the user ]</div>
     </div>
     <img src="assets/Pl Logos/latin/horizontal/svg/vertical_white.svg" alt="Platinumlist" style="height:52px;width:auto;">
   </div>
-  <div class="caption">platinumlist.net · Dubai · Abu Dhabi · Riyadh · Cairo</div>
 </section>

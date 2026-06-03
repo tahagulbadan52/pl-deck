@@ -38,6 +38,7 @@ the `.theme-*` class on its `.slide`. Kickers are optional everywhere — add
 | `service-checklist` | How-it-works + side stats | kicker, title, lead, checklist[], M×{num,label,ctx} | day, monday | 24 |
 | `service-pillars` | 4 numbered pillar cards | kicker, title, lead, 4×{no,title,desc}, foot | monday, day | 26 |
 | `service-statpair` | 2 hero deltas + editorial list | kicker, title, lead, 2×{num,label,ctx}, list-title, list[] | day, monday | 27,28,29 |
+| `process-steps` | How-it-works / steps-to-start (intro panel + numbered stepper) | kicker, headline+accentWord, lead, conf, 3–5×{num,title,desc}, cta | sabbath, haze | new |
 | `cta-nextsteps` | Closing CTA | headline, lead, 4×{num,label}, contact, cities, wordmark | haze, sabbath | 30 |
 | `closing` | Thank-you | headline, optional wordmark | haze, sabbath | 31 |
 

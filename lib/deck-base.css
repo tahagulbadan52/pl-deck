@@ -239,6 +239,37 @@
 .hm-legend .k { display: inline-flex; align-items: center; gap: 10px; font-size: 18px; }
 .hm-legend .sw { width: 22px; height: 22px; border-radius: 6px; }
 
+/* ---- Process steps (intro panel + vertical numbered stepper) ------------
+   For "how it works / steps to start" slides. Set the .slide padding to 0 so the
+   left panel goes edge-to-edge. Accent (circles, kicker, accent word) follows the
+   theme --accent, so the colour scheme changes with the theme. */
+.steps-layout { display: flex; height: 100%; }
+.steps-aside { width: 38%; flex: 0 0 38%; background: var(--pl-sabbath); color: #fff;
+  padding: var(--slide-pad) 56px; display: flex; flex-direction: column; }
+.steps-aside .kicker { color: var(--accent); }
+.steps-aside .accent { color: var(--accent); }
+.steps-aside .lead { margin-top: auto; color: rgba(255,255,255,.78); }
+.steps-aside .conf { font-family: var(--font-head); font-size: var(--fs-caption);
+  color: rgba(255,255,255,.4); text-transform: uppercase; letter-spacing: .08em; margin-top: 28px; }
+.steps-main { flex: 1 1 auto; padding: var(--slide-pad) 80px; display: flex;
+  flex-direction: column; justify-content: center; }
+.stepper { list-style: none; display: flex; flex-direction: column; }
+.step { display: flex; gap: 32px; }
+.step-rail { display: flex; flex-direction: column; align-items: center; flex: 0 0 auto; }
+.step-num { width: 84px; height: 84px; border-radius: 50%; background: var(--accent);
+  color: var(--pl-sabbath); font-family: var(--font-head); font-weight: 700; font-size: 40px;
+  line-height: 1; display: flex; align-items: center; justify-content: center; }
+.step-connector { width: 4px; flex: 1 1 auto; min-height: 40px; background: var(--accent);
+  opacity: .4; border-radius: 2px; margin: 12px 0; }
+.step:last-child .step-connector { display: none; }
+.step-body { padding-top: 14px; padding-bottom: 52px; }
+.step:last-child .step-body { padding-bottom: 0; }
+.step-title { font-family: var(--font-body); font-weight: 700; font-size: 30px; color: var(--text); }
+.step-desc { font-size: var(--fs-ctx); color: rgba(255,255,255,.6); margin-top: 8px; max-width: 48ch; }
+.steps-cta { margin-top: 44px; background: var(--pl-haze); color: #fff; padding: 26px 34px;
+  border-radius: 16px; font-size: 22px; font-weight: 700; }
+.steps-cta .go { color: var(--pl-monday); }
+
 /* ---- Checklist ----------------------------------------------------------- */
 .checklist { list-style: none; display: flex; flex-direction: column; gap: 24px; }
 .checklist li { display: flex; gap: 18px; align-items: flex-start; font-size: var(--fs-body); line-height: 1.3; }
