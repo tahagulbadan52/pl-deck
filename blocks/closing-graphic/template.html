@@ -1,0 +1,27 @@
+<!-- BLOCK: closing-graphic
+     PURPOSE: A closing / "let's talk" slide with a left-aligned headline and a large
+       graphic (3D object collage, product shot, or a big phosphor icon) on the
+       right. Warmer than the plain `closing` block. Logo top-left.
+     THEMES: theme-haze (default), theme-monday, theme-sabbath
+     SLOTS:
+       {logo} PL icon, top-left (white on haze/sabbath, blue on monday)
+       {headline} the sign-off (e.g. "Ready to explore? Let's discuss")
+       {graphic} EITHER an image { query/prompt, dims:"1100x1100" } rendered in an
+         .img-fill panel, OR a big phosphor .icon. Use the image variant for the
+         reference 3D-object look; delete the unused variant.
+     DENSITY: headline owns the left ~55%; graphic fills the right ~45%. No body
+       copy. NO contact email here and NO cities footer (see cta-nextsteps rules). -->
+<section class="slide theme-haze">
+  <img src="assets/Pl Logos/icon/white/icon_white.svg" alt="Platinumlist" style="width:84px; height:auto;">
+  <div class="fill" style="display:flex; align-items:center; gap:56px;">
+    <h2 class="headline xl" style="flex:1 1 0;">Ready to<br>explore?<br>Let's discuss</h2>
+    <!-- GRAPHIC — image variant (delete if using the icon variant below): -->
+    <div class="img-fill" style="flex:0 0 44%; aspect-ratio:1/1;">
+      <img src="assets/img/placeholder.jpg" alt="">
+      <!-- IMAGE: a playful 3D object collage (microphone, cassette). 1100x1100. -->
+    </div>
+    <!-- GRAPHIC — icon variant (delete if using the image variant above):
+    <span class="icon" style="--icon:url('assets/phosphor-icons/SVGs/bold/microphone-stage-bold.svg'); width:360px; height:360px; color:var(--pl-monday); flex:0 0 auto;"></span>
+    -->
+  </div>
+</section>

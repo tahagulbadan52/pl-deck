@@ -8,9 +8,13 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 ORDER = [
     "cover-hero", "section-divider", "stat-grid", "segment-row", "hero-stat-row",
     "methodology-windows", "timeline-table", "layer-columns", "data-table",
-    "bar-compare", "quality-stats", "funnel-table", "split-audience", "rank-list",
-    "summary-numbered", "case-study", "channels-table", "service-checklist",
-    "service-pillars", "service-statpair", "cta-nextsteps", "closing",
+    "heatmap-matrix", "bar-compare", "quality-stats", "funnel-table", "split-audience",
+    "rank-list", "summary-numbered", "case-study", "channels-table", "service-checklist",
+    "service-pillars", "service-statpair", "process-steps", "cta-nextsteps", "closing",
+    # ---- 2nd reference batch ----
+    "statement-bold", "milestone-stats", "bar-chart", "bg-statement", "feature-cards",
+    "segment-photos", "two-up-cards", "numbered-cards", "strategy-columns",
+    "converge-diagram", "venn-diagram", "package-compare", "case-stack", "closing-graphic",
 ]
 
 def read(p):

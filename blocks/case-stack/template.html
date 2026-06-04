@@ -1,0 +1,34 @@
+<!-- BLOCK: case-stack
+     PURPOSE: A case study with a big client title on the left and a stacked column
+       of metric cards on the right — a 2-up row of headline wins on top, then
+       full-width detail cards (channels, audience, ROAS). Use for proof / results
+       slides with several metrics of differing prominence.
+     THEMES: theme-haze (default), theme-sabbath
+     SLOTS:
+       {kicker} small "Case" eyebrow (top-left)
+       {title} client / campaign name (big, left)
+       {note} optional conclusion line pinned to the bottom-left
+       {topCards} 2 × { icon, head (UPPERCASE, e.g. "700% PROFITABILITY"), ctx }
+       {cards} 2-4 × { head (UPPERCASE), lines[] (1-3) }
+     DENSITY: left 40% title block; right 60% card stack. Top two cards are the
+       headline wins (icon-led); the rest are full-width detail cards. Cards on a
+       light card-monday ground use purple text automatically. -->
+<section class="slide theme-haze">
+  <div class="case-layout">
+    <div class="case-title">
+      <div class="kicker" style="color:var(--accent);">Case</div>
+      <h2 class="headline lg" style="margin-top:18px;">The Green<br>Planet Dubai</h2>
+      <!-- {note}: optional conclusion, pinned bottom. Delete the div if unused. -->
+      <div class="note"><div class="headline" style="font-size:34px; color:var(--accent);">Meta significantly contributed by enhancing initial awareness among potential attendees</div></div>
+    </div>
+    <div class="case-cards">
+      <div class="case-mini">
+        <div class="card card-monday"><div class="c-head"><span class="icon" style="--icon:url('assets/phosphor-icons/SVGs/bold/sparkle-bold.svg')"></span><div class="c-title">700%<br>Profitability</div></div><p class="ctx" style="margin:0;">7 AED return on each 1 AED invested</p></div>
+        <div class="card card-monday"><div class="c-head"><span class="icon" style="--icon:url('assets/phosphor-icons/SVGs/bold/ticket-bold.svg')"></span><div class="c-title">2.5x Boost<br>in Ticket Sales</div></div></div>
+      </div>
+      <div class="card card-monday"><div class="c-title">Channels</div><p class="ctx" style="margin:0;">Meta · Google · Programmatic display</p></div>
+      <div class="card card-monday"><div class="c-title">Audience</div><p class="ctx" style="margin:0;">Database of attractions, family &amp; similar attractions, lookalikes + remarketing to similar events and the family category.</p></div>
+      <div class="card card-monday"><div class="c-title">Revenue on Ad Spend</div><div class="num" style="font-size:44px;">7 AED</div><p class="ctx" style="margin:0;">per 1 AED spend</p></div>
+    </div>
+  </div>
+</section>

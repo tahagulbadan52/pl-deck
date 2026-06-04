@@ -1,0 +1,32 @@
+<!-- BLOCK: bg-statement
+     PURPOSE: A full-bleed background image (a map, a city, a crowd) with a headline
+       top-left and one or two short paragraphs bottom-left. Use for "market
+       knowledge / our footprint / why this region" context slides.
+     THEMES: theme-haze (default), theme-sabbath
+     SLOTS:
+       {kicker} optional eyebrow
+       {headline} the title
+       {paras} 1-2 short paragraphs, bottom-left
+       {image} { query/prompt, dims:"1920x1080" } — full-bleed, brand-tinted by
+         .bg-image. For the reference "map" look, use a silhouette/map asset.
+     DENSITY: text hugs the left; the image carries the field behind it. The
+       .bg-image tint keeps any photo on-brand. ALL text lives inside .bg-content
+       (which sits above the image via z-index) — never add text as a bare sibling
+       of .bg-image or it renders BEHIND the image. Add .scrim to .bg-image only if
+       the photo is busy and text needs more contrast. If no image is supplied,
+       delete the whole .bg-image div for a flat-colour slide. -->
+<section class="slide theme-haze">
+  <div class="bg-image">
+    <img src="assets/img/placeholder.jpg" alt="">
+    <!-- IMAGE: a faded map of the MENA / Mediterranean region. dims 1920x1080.
+         Replace src with a hosted URL, or delete this .bg-image block for a flat bg. -->
+  </div>
+  <div class="bg-content" style="display:flex; flex-direction:column; flex:1 1 auto;">
+    <div class="kicker">GCC market knowledge</div>
+    <h2 class="headline lg" style="margin-top:12px;">GCC Market Knowledge</h2>
+    <div style="margin-top:auto; max-width:46ch; display:flex; flex-direction:column; gap:24px;">
+      <p class="lead">Our region is deeply interconnected, with people travelling constantly, often for event tourism.</p>
+      <p class="lead">With representation in 7 countries, we see how individuals move between them to events.</p>
+    </div>
+  </div>
+</section>

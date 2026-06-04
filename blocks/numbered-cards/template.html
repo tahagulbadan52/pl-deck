@@ -1,0 +1,30 @@
+<!-- BLOCK: numbered-cards
+     PURPOSE: 3-5 sequential principle / step cards in a single horizontal row,
+       each led by a giant number. Use for "our strategy relies on these
+       principles", ordered priorities, or a flat list of phases. (For a vertical
+       connected stepper with an intro panel, use process-steps instead.)
+     THEMES: theme-sabbath (default), theme-haze
+     SLOTS:
+       {kicker} optional eyebrow
+       {headline} the title
+       {lead} optional supporting line
+       {cards} 3-5 × { no (the digit), title? (optional short title), desc }
+     DENSITY: use grid-3 / grid-4 / grid-5 to match the count. Each card: a big
+       MD Nichrome number + a short description, clustered with .feature.center so
+       a tall card never reads as empty. The cards are filled (lime card-day) and
+       need a DARK ground (theme-sabbath/haze) — never card-day on theme-day. -->
+<section class="slide theme-sabbath">
+  <div class="head">
+    <div class="kicker">The strategy</div>
+    <h2 class="headline lg">Our strategy relies on these main principles</h2>
+  </div>
+  <div class="fill">
+    <div class="grid grid-5" style="height:100%;">
+      <div class="card card-day feature center"><div class="num" style="font-size:88px;">1</div><p class="ctx" style="margin:0;">Promote each event individually — segmenting by performance and audience.</p></div>
+      <div class="card card-day feature center"><div class="num" style="font-size:88px;">2</div><p class="ctx" style="margin:0;">Promote in general with the main goal — sell tickets and grow the audience.</p></div>
+      <div class="card card-day feature center"><div class="num" style="font-size:88px;">3</div><p class="ctx" style="margin:0;">Use the synergy of internal and all external channels.</p></div>
+      <div class="card card-day feature center"><div class="num" style="font-size:88px;">4</div><p class="ctx" style="margin:0;">Use Big Data &amp; AI to target and optimise.</p></div>
+      <div class="card card-day feature center"><div class="num" style="font-size:88px;">5</div><p class="ctx" style="margin:0;">Full transparency on spend, performance and reporting.</p></div>
+    </div>
+  </div>
+</section>

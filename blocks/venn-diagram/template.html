@@ -1,0 +1,33 @@
+<!-- BLOCK: venn-diagram
+     PURPOSE: Two overlapping circles with a filled intersection lens — the classic
+       "two approaches, one shared outcome" diagram. Optional bracket captions above
+       and below, and a short descriptor beside each circle.
+     THEMES: theme-sabbath (default), theme-haze
+     SLOTS:
+       {kicker} optional eyebrow
+       {headline} the slide title
+       {left} { title, desc } — left circle + its aside note
+       {right} { title, desc } — right circle + its aside note
+       {center} the intersection (lens) label — the shared outcome
+       {top} optional bracket caption above (e.g. "Powered by Big Data & AI")
+       {bottom} optional bracket caption below
+     DENSITY: circles are outlined in the accent; the lens is filled accent. Keep
+       circle titles to 2 words; asides to one short line. -->
+<section class="slide theme-sabbath">
+  <div class="head">
+    <h2 class="headline lg">The Strategy</h2>
+  </div>
+  <div class="fill">
+    <div class="venn">
+      <div class="venn-cap top">Powered by Big Data &amp; AI</div>
+      <div class="venn-stage">
+        <div class="venn-c l">Segmented<br>Campaigns</div>
+        <div class="venn-c r">General<br>Campaigns</div>
+        <div class="venn-lens">Sell<br>Tickets</div>
+      </div>
+      <div class="venn-aside l">Promoting each event individually using audience segments.</div>
+      <div class="venn-aside r">Promoting all inventory and growing the audience.</div>
+      <div class="venn-cap bottom">All controlled and monitored in full transparency</div>
+    </div>
+  </div>
+</section>

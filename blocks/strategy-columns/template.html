@@ -1,0 +1,49 @@
+<!-- BLOCK: strategy-columns
+     PURPOSE: A funnel / strategy matrix — 3-5 named phases as columns, each with a
+       header pill, a description box, and a stack of tactic chips beneath, plus an
+       optional full-width base bar that spans all columns. Use for funnel stages
+       (Awareness → Engagement → Retention → Loyalty) and channel-per-stage plans.
+     THEMES: theme-sabbath (default), theme-haze
+     SLOTS:
+       {kicker} optional eyebrow
+       {headline} the slide title
+       {columns} 3-5 × { head (UPPERCASE), desc, items[] (0-4 tactic chips) }
+       {bar} optional full-width base statement spanning all columns
+     DENSITY: columns are equal-width; the header pill + outlined desc box align
+       across the top, tactic chips stack below (counts may differ per column). -->
+<section class="slide theme-sabbath">
+  <div class="head">
+    <h2 class="headline lg">Strategy Overview</h2>
+  </div>
+  <div class="fill">
+    <div class="strat">
+      <div class="strat-grid">
+        <div class="strat-col">
+          <div class="strat-head">Awareness</div>
+          <div class="strat-desc">Attract users not yet interested in football and introduce it as a leisure activity.</div>
+          <div class="strat-item">Header Banners</div>
+          <div class="strat-item">Landing Page</div>
+          <div class="strat-item">Social Ads</div>
+        </div>
+        <div class="strat-col">
+          <div class="strat-head">Engagement</div>
+          <div class="strat-desc">Engage and encourage users to attend more matches.</div>
+          <div class="strat-item">Email Campaigns</div>
+          <div class="strat-item">Targeted Ads</div>
+        </div>
+        <div class="strat-col">
+          <div class="strat-head">Retention</div>
+          <div class="strat-desc">Notify users when new matches are available, focusing on their team.</div>
+          <div class="strat-item">Auto Emails</div>
+          <div class="strat-item">Push Notifications</div>
+        </div>
+        <div class="strat-col">
+          <div class="strat-head">Loyalty</div>
+          <div class="strat-desc">Provide VIP deals, early access and loyalty perks to strengthen commitment.</div>
+          <div class="strat-item">Exclusive Offers</div>
+        </div>
+      </div>
+      <div class="strat-bar">Remarketing + Cross-Channel Alignment</div>
+    </div>
+  </div>
+</section>

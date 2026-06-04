@@ -122,6 +122,11 @@ and swapping the text — NOT reasoning out a fresh layout every time.
 
 1. **Read the catalog** — `block-catalog.md` is the menu (block IDs, slots,
    themes, and which reference slide each came from). Read it before composing.
+   The library spans covers, stats, segments, tables, **charts** (`bar-chart`),
+   **diagrams** (`converge-diagram`, `venn-diagram`, `strategy-columns`), photo
+   segments (`segment-photos`), manifesto statements (`statement-bold`), plan
+   compares (`package-compare`), case stacks (`case-stack`) and closings. Prefer an
+   existing block over inventing a layout — there is almost always a fit.
 2. **Map the approved structure to block IDs.** Every slide in your plan must
    resolve to a block. Example: `cover-hero → stat-grid → segment-row →
    hero-stat-row → data-table → … → cta-nextsteps`.
@@ -791,31 +796,56 @@ The PDF is produced ONLY after the user has reviewed the HTML and explicitly ask
 2. Verify the `@media print` block has all `!important` overrides for `.slide` positioning (the deck uses `position: absolute` + `opacity: 0` for inactive slides; print CSS must un-stack them).
 3. Verify MD Nichrome is base64-embedded in the `@font-face` rule, not linked externally.
 
-### Export command (Puppeteer, not Chrome CLI)
+### Export command — SCREENSHOT-BASED (DEFAULT, use this)
 
-**HARD RULE: Use Puppeteer, never `chrome --print-to-pdf`.** Chrome's CLI does not honor `@page` sizes in pixels and frequently defaults to 1440×810 regardless of overrides. Puppeteer's `page.pdf({ width, height })` is the only reliable path to true 1920×1080.
+**HARD RULE: export by screenshotting each slide, NOT via Chrome print-to-PDF.**
 
-Script (`/tmp/render-pdf.js`):
-```javascript
-const puppeteer = require('/tmp/node_modules/puppeteer');
-(async () => {
-  const htmlPath = '[absolute path to deck].html';
-  const pdfPath  = '[absolute path to deck].pdf';
-  const browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox'] });
-  const page = await browser.newPage();
-  await page.setViewport({ width: 1920, height: 1080, deviceScaleFactor: 1 });
-  await page.goto('file://' + htmlPath, { waitUntil: 'networkidle0', timeout: 60000 });
-  await new Promise(r => setTimeout(r, 2000));  // font + Chart.js settle
-  await page.emulateMediaType('print');
-  await page.pdf({
-    path: pdfPath,
-    width: '1920px', height: '1080px',
-    printBackground: true, preferCSSPageSize: false,
-    margin: { top: 0, right: 0, bottom: 0, left: 0 },
-  });
-  await browser.close();
-})();
+**Why (the mask-icon bug):** all deck icons are CSS masks (`-webkit-mask` +
+`background-color: currentColor`). Chrome's print-to-PDF engine (`page.pdf()` and
+`chrome --print-to-pdf`) rasterizes masks unreliably — when the mask drops out the
+element fills as a solid **currentColor box**, and when it partially applies the
+icon is **clipped** (e.g. half a megaphone). It is specific to the print path;
+on-screen rendering and screenshots are always correct. Printing also tripped on
+`.slide-wrapper { overflow:hidden }` not being reset, collapsing all slides onto
+one page. The screenshot path avoids BOTH problems.
+
+The screenshot path drives the runtime to show one slide at a time, captures each
+at 2× (3840×2160) exactly as the browser draws it, then stitches the PNGs into a
+true 1920×1080 PDF (page = 1440×810pt @ 96dpi). The PDF is pixel-identical to the
+browser. Trade-off: pages are images, not selectable text — correct and expected
+for a mask-icon pitch deck.
+
+**Use the ready-made exporter** (installs nothing beyond puppeteer + Pillow):
+```bash
+cd /tmp && npm install puppeteer --silent     # once, if missing
+python3 ~/.claude/skills/pl-deck/scripts/export_pdf.py /abs/path/deck.html [/abs/path/out.pdf]
 ```
+`scripts/export_pdf.py` is the canonical implementation — it screenshots every
+`.slide-holder` and assembles the PDF with Pillow at `resolution = 72*SCALE` so the
+page is exactly 1920×1080px. Requires `pip install Pillow`.
+
+### Fallback — Puppeteer print-to-PDF (ONLY for text-only decks with no mask icons)
+
+Vector/selectable text, but **do not use on any deck that has icons** (boxes/clipping).
+If you must, inject these print overrides before `page.pdf()` or all 12 slides
+collapse onto one page (`.slide-wrapper`'s `overflow:hidden` is not reset in the
+`@media print` block):
+```javascript
+await page.emulateMediaType('print');
+await page.addStyleTag({ content: `
+  html, body { height:auto!important; overflow:visible!important; }
+  .slide-wrapper { position:static!important; display:block!important; height:auto!important; overflow:visible!important; }
+  #slideContainer { position:static!important; transform:none!important; width:1920px!important; height:auto!important; }
+  .slide-holder { position:relative!important; inset:auto!important; opacity:1!important; page-break-after:always; }
+  .slide-holder .slide { position:relative!important; inset:auto!important; }
+`});
+await page.pdf({ path: pdfPath, width:'1920px', height:'1080px', printBackground:true,
+  preferCSSPageSize:false, margin:{top:0,right:0,bottom:0,left:0} });
+```
+Better permanent fix for this path: add `overflow:visible` + `height:auto` resets
+for `.slide-wrapper`/`#slideContainer` to the `@media print` block in
+`lib/deck-runtime.css`. (Still won't fix the mask-icon bug — that needs the
+screenshot path or inline-`<svg>` icons.)
 
 Install puppeteer to `/tmp/node_modules` if not already present: `cd /tmp && npm install puppeteer --silent`
 

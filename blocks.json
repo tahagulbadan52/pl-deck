@@ -503,6 +503,238 @@
           "action": { "type": "string", "max": 64, "help": "the accent-coloured call to action" }
         }}
       }
+    },
+    {
+      "id": "statement-bold",
+      "purpose": "A single giant brand assertion / manifesto line, anchored bottom-left, with optional inline icon glyphs. A poster slide, not a paragraph.",
+      "defaultTheme": "theme-haze",
+      "themes": ["theme-haze", "theme-day", "theme-sabbath", "theme-monday"],
+      "kickerSupported": true,
+      "ref": "batch2",
+      "slots": {
+        "kicker": { "type": "string", "max": 28, "optional": true },
+        "headline": { "type": "string", "max": 80, "help": "the statement; <br> for line breaks. Wrap a punch word in <span class=\"accent\">; drop <span class=\"glyph\" style=\"--icon:url(...)\"> for an inline icon (0-2)." }
+      }
+    },
+    {
+      "id": "milestone-stats",
+      "purpose": "A headline claim (with an accent-coloured lead phrase) above a row of 3-4 big filled stat cards. For milestone / credentials slides.",
+      "defaultTheme": "theme-haze",
+      "themes": ["theme-haze", "theme-sabbath", "theme-monday"],
+      "kickerSupported": true,
+      "ref": "batch2",
+      "slots": {
+        "kicker": { "type": "string", "max": 28, "optional": true },
+        "headline": { "type": "string", "max": 64, "help": "wrap the lead phrase in <span class=\"accent\">" },
+        "cards": { "type": "array", "min": 3, "max": 4, "item": {
+          "num": { "type": "string", "max": 12, "help": "<br> allowed for 2-line numbers e.g. 'SAR<br>105 M+'" },
+          "label": { "type": "string", "max": 24, "optional": true, "help": "small bold lead-in above the number" },
+          "ctx": { "type": "string", "max": 90 }
+        }}
+      }
+    },
+    {
+      "id": "bar-chart",
+      "purpose": "A tall categorical bar chart for many categories (pure CSS bars; reliable in print/PDF).",
+      "defaultTheme": "theme-sabbath",
+      "themes": ["theme-sabbath", "theme-haze"],
+      "kickerSupported": true,
+      "ref": "batch2",
+      "slots": {
+        "kicker": { "type": "string", "max": 28, "optional": true },
+        "headline": { "type": "string", "max": 90, "help": "chart title; sentence case is fine" },
+        "bars": { "type": "array", "min": 6, "max": 14, "item": {
+          "label": { "type": "string", "max": 14 },
+          "value": { "type": "string", "max": 8, "help": "the number shown above the bar" },
+          "heightPct": { "type": "number", "help": "bar height as % of plot (scale tallest to ~92-98)" },
+          "dim": { "type": "boolean", "optional": true, "help": "grey the bar out" }
+        }}
+      }
+    },
+    {
+      "id": "bg-statement",
+      "purpose": "Full-bleed background image (map / city / crowd) with a headline top-left and 1-2 short paragraphs bottom-left.",
+      "defaultTheme": "theme-haze",
+      "themes": ["theme-haze", "theme-sabbath"],
+      "kickerSupported": true,
+      "ref": "batch2",
+      "slots": {
+        "kicker": { "type": "string", "max": 28, "optional": true },
+        "headline": { "type": "string", "max": 48 },
+        "paras": { "type": "array", "min": 1, "max": 2, "item": { "type": "text", "max": 140 } },
+        "image": { "type": "image", "optional": true, "dims": "1920x1080", "help": "full-bleed, brand-tinted by .bg-image. ALL text must live inside .bg-content. Omit the image div for a flat-colour slide." }
+      }
+    },
+    {
+      "id": "feature-cards",
+      "purpose": "A dominant headline + lead with a row of 3-4 short titled cards anchored along the bottom. Lighter than segment-row (no icon badges / tags) — the headline leads.",
+      "defaultTheme": "theme-sabbath",
+      "themes": ["theme-sabbath", "theme-haze"],
+      "kickerSupported": false,
+      "ref": "batch2",
+      "slots": {
+        "headline": { "type": "string", "max": 72 },
+        "lead": { "type": "text", "max": 260, "optional": true },
+        "cards": { "type": "array", "min": 3, "max": 4, "item": {
+          "title": { "type": "string", "max": 20, "help": "UPPERCASE short" },
+          "desc": { "type": "text", "max": 110 }
+        }}
+      }
+    },
+    {
+      "id": "segment-photos",
+      "purpose": "3-4 audience / segment cards, each a brand-tinted photo with a label, a headline stat and a short descriptor overlaid at the bottom.",
+      "defaultTheme": "theme-sabbath",
+      "themes": ["theme-sabbath", "theme-haze"],
+      "kickerSupported": false,
+      "ref": "batch2",
+      "slots": {
+        "headline": { "type": "string", "max": 60 },
+        "cards": { "type": "array", "min": 3, "max": 4, "item": {
+          "image": { "type": "image", "dims": "700x900" },
+          "title": { "type": "string", "max": 22, "help": "UPPERCASE" },
+          "num": { "type": "string", "max": 8, "help": "the focal stat, e.g. '60%'" },
+          "desc": { "type": "text", "max": 90 }
+        }}
+      }
+    },
+    {
+      "id": "two-up-cards",
+      "purpose": "Two big statement cards side by side (e.g. THE BRIEF / THE OBJECTIVE, PROBLEM / SOLUTION). Filled lime cards on a dark ground.",
+      "defaultTheme": "theme-sabbath",
+      "themes": ["theme-sabbath", "theme-haze", "theme-monday"],
+      "kickerSupported": false,
+      "ref": "batch2",
+      "slots": {
+        "cards": { "type": "array", "min": 2, "max": 2, "item": {
+          "title": { "type": "string", "max": 18, "help": "1-2 words; <br> to stack" },
+          "desc": { "type": "text", "max": 110 }
+        }}
+      }
+    },
+    {
+      "id": "numbered-cards",
+      "purpose": "3-5 sequential principle / phase cards in a single horizontal row, each led by a giant number. (For a vertical connected stepper with an intro panel, use process-steps.)",
+      "defaultTheme": "theme-sabbath",
+      "themes": ["theme-sabbath", "theme-haze"],
+      "kickerSupported": true,
+      "ref": "batch2",
+      "slots": {
+        "kicker": { "type": "string", "max": 28, "optional": true },
+        "headline": { "type": "string", "max": 64 },
+        "lead": { "type": "text", "max": 160, "optional": true },
+        "cards": { "type": "array", "min": 3, "max": 5, "item": {
+          "no": { "type": "string", "max": 2 },
+          "title": { "type": "string", "max": 24, "optional": true },
+          "desc": { "type": "text", "max": 110 }
+        }}
+      }
+    },
+    {
+      "id": "strategy-columns",
+      "purpose": "A funnel / strategy matrix — 3-5 named phases as columns, each with a header pill, an outlined description box and a stack of tactic chips, plus an optional full-width base bar.",
+      "defaultTheme": "theme-sabbath",
+      "themes": ["theme-sabbath", "theme-haze"],
+      "kickerSupported": true,
+      "ref": "batch2",
+      "slots": {
+        "kicker": { "type": "string", "max": 28, "optional": true },
+        "headline": { "type": "string", "max": 48 },
+        "columns": { "type": "array", "min": 3, "max": 5, "item": {
+          "head": { "type": "string", "max": 18, "help": "UPPERCASE phase name" },
+          "desc": { "type": "text", "max": 110 },
+          "items": { "type": "array", "min": 0, "max": 4, "item": { "type": "string", "max": 24 } }
+        }},
+        "bar": { "type": "string", "max": 60, "optional": true, "help": "full-width base statement spanning all columns" }
+      }
+    },
+    {
+      "id": "converge-diagram",
+      "purpose": "Two source nodes feeding a single dominant centre node, with dashed arrows pointing inward. For 'concept of remarketing', 'inputs -> focus'.",
+      "defaultTheme": "theme-sabbath",
+      "themes": ["theme-sabbath", "theme-haze"],
+      "kickerSupported": false,
+      "ref": "batch2",
+      "slots": {
+        "headline": { "type": "string", "max": 48 },
+        "center": { "type": "string", "max": 36, "help": "dominant node label; <br> to stack" },
+        "sides": { "type": "array", "min": 2, "max": 2, "item": { "type": "string", "max": 30, "help": "source node label; <br> to stack" } }
+      }
+    },
+    {
+      "id": "venn-diagram",
+      "purpose": "Two overlapping circles with a filled intersection lens — 'two approaches, one shared outcome'. Optional bracket captions above/below and a note beside each circle.",
+      "defaultTheme": "theme-sabbath",
+      "themes": ["theme-sabbath", "theme-haze"],
+      "kickerSupported": false,
+      "ref": "batch2",
+      "slots": {
+        "headline": { "type": "string", "max": 48 },
+        "left": { "type": "object", "item": {
+          "title": { "type": "string", "max": 22, "help": "<br> to stack" },
+          "desc": { "type": "text", "max": 80, "optional": true }
+        }},
+        "right": { "type": "object", "item": {
+          "title": { "type": "string", "max": 22, "help": "<br> to stack" },
+          "desc": { "type": "text", "max": 80, "optional": true }
+        }},
+        "center": { "type": "string", "max": 18, "help": "the intersection (lens) label; <br> to stack" },
+        "top": { "type": "string", "max": 48, "optional": true, "help": "bracket caption above" },
+        "bottom": { "type": "string", "max": 60, "optional": true, "help": "bracket caption below" }
+      }
+    },
+    {
+      "id": "package-compare",
+      "purpose": "Two plans / packages side by side (current vs proposed; standard vs exclusive). One outlined, one filled to flag the recommended option.",
+      "defaultTheme": "theme-sabbath",
+      "themes": ["theme-sabbath", "theme-haze"],
+      "kickerSupported": false,
+      "ref": "batch2",
+      "slots": {
+        "cards": { "type": "array", "min": 2, "max": 2, "item": {
+          "title": { "type": "string", "max": 28 },
+          "head": { "type": "string", "max": 40, "help": "UPPERCASE claim; <br> for 2 lines" },
+          "lines": { "type": "array", "min": 1, "max": 3, "item": { "type": "string", "max": 70 } },
+          "foot": { "type": "string", "max": 90, "optional": true, "help": "footnote" },
+          "recommended": { "type": "boolean", "optional": true, "help": "true -> filled card-monday; false -> card-outline" }
+        }},
+        "note": { "type": "string", "max": 48, "optional": true, "help": "bottom-right caption" }
+      }
+    },
+    {
+      "id": "case-stack",
+      "purpose": "A case study with a big client title on the left and a stacked column of metric cards on the right (a 2-up row of headline wins, then full-width detail cards).",
+      "defaultTheme": "theme-haze",
+      "themes": ["theme-haze", "theme-sabbath"],
+      "kickerSupported": true,
+      "ref": "batch2",
+      "slots": {
+        "kicker": { "type": "string", "max": 16, "optional": true, "help": "e.g. 'Case'" },
+        "title": { "type": "string", "max": 32, "help": "client / campaign; <br> to stack" },
+        "note": { "type": "string", "max": 120, "optional": true, "help": "conclusion line pinned bottom-left" },
+        "topCards": { "type": "array", "min": 2, "max": 2, "item": {
+          "icon": { "type": "icon" },
+          "head": { "type": "string", "max": 28, "help": "UPPERCASE; <br> for 2 lines, e.g. '700%<br>Profitability'" },
+          "ctx": { "type": "string", "max": 60, "optional": true }
+        }},
+        "cards": { "type": "array", "min": 2, "max": 4, "item": {
+          "head": { "type": "string", "max": 28, "help": "UPPERCASE" },
+          "lines": { "type": "array", "min": 1, "max": 3, "item": { "type": "string", "max": 90 } }
+        }}
+      }
+    },
+    {
+      "id": "closing-graphic",
+      "purpose": "A closing / 'let's talk' slide with a left-aligned headline and a large graphic (3D object collage, product shot, or big phosphor icon) on the right. Warmer than `closing`.",
+      "defaultTheme": "theme-haze",
+      "themes": ["theme-haze", "theme-monday", "theme-sabbath"],
+      "kickerSupported": false,
+      "ref": "batch2",
+      "slots": {
+        "headline": { "type": "string", "max": 40, "help": "the sign-off; <br> for line breaks" },
+        "graphic": { "type": "image", "optional": true, "dims": "1100x1100", "help": "image variant (3D-object look) rendered in .img-fill; OR delete it and use the big phosphor .icon variant in the template. NO contact email, NO cities footer here." },
+        "logo": { "type": "enum", "values": ["icon_white", "icon_blue"], "optional": true, "help": "white on haze/sabbath, blue on monday" }
+      }
     }
   ]
 }

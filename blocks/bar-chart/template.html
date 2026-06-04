@@ -1,0 +1,49 @@
+<!-- BLOCK: bar-chart
+     PURPOSE: A tall categorical bar chart for many categories (e.g. traffic by
+       country, sales by month). Pure CSS bars — reliable in print/PDF, no Chart.js.
+     THEMES: theme-sabbath (default), theme-haze
+     SLOTS:
+       {kicker} optional eyebrow
+       {headline} the chart title / question (sentence case is fine here)
+       {bars} 6-14 × { label, value (number for the tick), heightPct (0-100),
+         dim? (true to grey a bar out) }
+     DENSITY: bars fill the plot; value sits on top of each bar; labels rotate -38°.
+       Keep to <=14 categories so rotated 18px labels never collide.
+     NOTE: heightPct is the bar height as % of plot — scale your tallest to ~92%. -->
+<section class="slide theme-sabbath">
+  <div class="head">
+    <h2 class="headline lg" style="font-size:48px;">Top countries (excl. UAE) sending audience<br>to UAE events &amp; attractions · 2023</h2>
+  </div>
+  <div class="fill">
+    <div class="barchart">
+      <div class="bc-plot">
+        <div class="bc-col"><div class="bc-val">12.2</div><div class="bc-bar" style="height:62%;"></div></div>
+        <div class="bc-col"><div class="bc-val">8.6</div><div class="bc-bar" style="height:44%;"></div></div>
+        <div class="bc-col"><div class="bc-val">15.2</div><div class="bc-bar" style="height:77%;"></div></div>
+        <div class="bc-col"><div class="bc-val">6.8</div><div class="bc-bar" style="height:35%;"></div></div>
+        <div class="bc-col"><div class="bc-val">18.4</div><div class="bc-bar" style="height:93%;"></div></div>
+        <div class="bc-col"><div class="bc-val">9.0</div><div class="bc-bar" style="height:46%;"></div></div>
+        <div class="bc-col"><div class="bc-val">4.7</div><div class="bc-bar dim" style="height:24%;"></div></div>
+        <div class="bc-col"><div class="bc-val">13.6</div><div class="bc-bar" style="height:69%;"></div></div>
+        <div class="bc-col"><div class="bc-val">11.1</div><div class="bc-bar" style="height:56%;"></div></div>
+        <div class="bc-col"><div class="bc-val">14.8</div><div class="bc-bar" style="height:75%;"></div></div>
+        <div class="bc-col"><div class="bc-val">16.8</div><div class="bc-bar" style="height:85%;"></div></div>
+        <div class="bc-col"><div class="bc-val">19.5</div><div class="bc-bar" style="height:98%;"></div></div>
+      </div>
+      <div class="bc-axis">
+        <div class="bc-tick">Brazil</div>
+        <div class="bc-tick">Japan</div>
+        <div class="bc-tick">Germany</div>
+        <div class="bc-tick">India</div>
+        <div class="bc-tick">Canada</div>
+        <div class="bc-tick">Australia</div>
+        <div class="bc-tick">South Africa</div>
+        <div class="bc-tick">Mexico</div>
+        <div class="bc-tick">Italy</div>
+        <div class="bc-tick">Argentina</div>
+        <div class="bc-tick">Netherlands</div>
+        <div class="bc-tick">Sweden</div>
+      </div>
+    </div>
+  </div>
+</section>

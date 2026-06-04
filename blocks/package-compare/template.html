@@ -1,0 +1,36 @@
+<!-- BLOCK: package-compare
+     PURPOSE: Two plans / packages side by side — the current vs the proposed, or
+       standard vs exclusive. One card outlined, one filled to flag the recommended
+       option. Each: a small title, a big headline claim, 1-3 detail lines, footnote.
+     THEMES: theme-sabbath (default), theme-haze
+     SLOTS:
+       {cards} EXACTLY 2 × { title, head (UPPERCASE claim), lines[] (1-3),
+         foot? (footnote), recommended? (boolean -> filled card) }
+       {note} optional bottom-right caption (e.g. "* exclusively for CLIENT")
+     DENSITY: equal full-height cards, content centred. The recommended card is
+       filled (card-monday); the other is outlined (card-outline). -->
+<section class="slide theme-sabbath">
+  <div class="fill">
+    <div class="grid grid-2" style="height:100%;">
+      <div class="card card-outline" style="padding:0;">
+        <div class="pkg">
+          <div class="pkg-title" style="color:var(--accent);">Current Package</div>
+          <div class="pkg-head" style="color:var(--accent);">Marketing support<br>as exclusive partner</div>
+          <div class="pkg-line">400,000 AED in value of Platinumlist Marketing Inventory</div>
+          <div class="pkg-line">10% Management Fee* in digital campaigns to cover resources</div>
+          <div class="pkg-foot">* lowest management fee, exclusive for you — all other exclusive partners pay 20%.</div>
+        </div>
+      </div>
+      <div class="card card-monday" style="padding:0;">
+        <div class="pkg">
+          <div class="pkg-title">New Package*</div>
+          <div class="pkg-head">Marketing support<br>as exclusive partner</div>
+          <div class="pkg-line">400,000 AED in value of Platinumlist Marketing Inventory</div>
+          <div class="pkg-line">7,000 AED monthly management fee* for digital campaigns</div>
+          <div class="pkg-foot">* to cover resources</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot" style="text-align:right;">* exclusively for [CLIENT]</div>
+</section>

@@ -1,0 +1,26 @@
+<!-- BLOCK: two-up-cards
+     PURPOSE: Two big statement cards side by side — e.g. "THE BRIEF / THE
+       OBJECTIVE", "PROBLEM / SOLUTION", "BEFORE / AFTER". Each card is a centred
+       two-word title over a short supporting line.
+     THEMES: theme-sabbath (default), theme-haze, theme-monday
+     SLOTS:
+       {kicker} optional eyebrow (rarely needed)
+       {cards} EXACTLY 2 × { title (1-2 words, <br> to stack), desc }
+     DENSITY: two equal full-height cards, content vertically centred. The title is
+       the hero; keep the desc to one short sentence. The cards are filled (lime
+       card-day) and need a DARK slide ground (theme-sabbath/haze) for contrast —
+       never put card-day on theme-day (lime on lime disappears). -->
+<section class="slide theme-sabbath">
+  <div class="fill">
+    <div class="grid grid-2" style="height:100%;">
+      <div class="card card-day feature center" style="align-items:center; text-align:center;">
+        <div class="num" style="font-size:84px; line-height:.96;">The<br>Brief</div>
+        <p class="ctx" style="margin:0; font-size:var(--fs-body); font-weight:700; max-width:30ch;">Identify collaboration opportunities to position MAF malls to Platinumlist's users.</p>
+      </div>
+      <div class="card card-day feature center" style="align-items:center; text-align:center;">
+        <div class="num" style="font-size:84px; line-height:.96;">The<br>Objective</div>
+        <p class="ctx" style="margin:0; font-size:var(--fs-body); font-weight:700; max-width:30ch;">Drive awareness around MAF malls and increase footfall.</p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,42 @@
+<!-- BLOCK: segment-photos
+     PURPOSE: 3-4 audience / segment cards, each a photo with a label, a headline
+       stat and a short descriptor overlaid on the bottom. Use for "users you can
+       reach / who comes to our events" reach slides.
+     THEMES: theme-sabbath (default), theme-haze
+     SLOTS:
+       {kicker} optional eyebrow
+       {headline} the slide title
+       {cards} 3-4 × { image{query/prompt,dims:"700x900"}, title (UPPERCASE),
+         num (e.g. "60%"), desc }
+     DENSITY: cards are equal-height photo tiles; each photo is brand-tinted by
+       .img-fill and darkened at the bottom so the label/stat/desc read clearly.
+       The accent-coloured stat is the focal point of each card. -->
+<section class="slide theme-sabbath">
+  <div class="head">
+    <h2 class="headline lg">Users you can reach through Platinumlist</h2>
+  </div>
+  <div class="fill">
+    <div class="grid grid-4" style="height:100%;">
+      <div class="photo-card">
+        <div class="img-fill"><img src="assets/img/placeholder.jpg" alt=""></div>
+        <!-- IMAGE: concert crowd with hands up. 700x900. -->
+        <div class="pc-body"><div class="pc-title">Concert Goers</div><div class="pc-num">60%</div><p class="pc-desc">of our database — mix of mainstream and niche, repeat buyers across genres.</p></div>
+      </div>
+      <div class="photo-card">
+        <div class="img-fill"><img src="assets/img/placeholder.jpg" alt=""></div>
+        <!-- IMAGE: family at a theme-park / attraction. 700x900. -->
+        <div class="pc-body"><div class="pc-title">Attraction Visitors</div><div class="pc-num">14%</div><p class="pc-desc">Families and individuals seeking experiences across the emirates.</p></div>
+      </div>
+      <div class="photo-card">
+        <div class="img-fill"><img src="assets/img/placeholder.jpg" alt=""></div>
+        <!-- IMAGE: stadium sports fans cheering. 700x900. -->
+        <div class="pc-body"><div class="pc-title">Sports Fans</div><div class="pc-num">12%</div><p class="pc-desc">Fans of the sport, the team and the day out — high-intent, high-spend.</p></div>
+      </div>
+      <div class="photo-card">
+        <div class="img-fill"><img src="assets/img/placeholder.jpg" alt=""></div>
+        <!-- IMAGE: family enjoying outdoor festival. 700x900. -->
+        <div class="pc-body"><div class="pc-title">Outgoing Families</div><div class="pc-num">8%</div><p class="pc-desc">Families with children, events and various attractions on the calendar.</p></div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -39,8 +39,31 @@ the `.theme-*` class on its `.slide`. Kickers are optional everywhere — add
 | `service-pillars` | 4 numbered pillar cards | kicker, title, lead, 4×{no,title,desc}, foot | monday, day | 26 |
 | `service-statpair` | 2 hero deltas + editorial list | kicker, title, lead, 2×{num,label,ctx}, list-title, list[] | day, monday | 27,28,29 |
 | `process-steps` | How-it-works / steps-to-start (intro panel + numbered stepper) | kicker, headline+accentWord, lead, conf, 3–5×{num,title,desc}, cta | sabbath, haze | new |
-| `cta-nextsteps` | Closing CTA | headline, lead, 4×{num,label}, contact, cities, wordmark | haze, sabbath | 30 |
+| `cta-nextsteps` | Closing CTA | headline, lead, 4×{num,label}, contact, wordmark | haze, sabbath | 30 |
 | `closing` | Thank-you | headline, optional wordmark | haze, sabbath | 31 |
+
+## Batch 2 — added from the 2nd reference set
+
+These were extracted from a second pack of approved Platinumlist slides. They cover
+manifesto statements, milestones, charts, diagrams, photo segments, plan compares and
+case stacks. Colours can change — every block re-themes from its `.theme-*` class.
+
+| ID | Purpose | Slots | Themes | Ref |
+|----|---------|-------|--------|-----|
+| `statement-bold` | Giant manifesto line, bottom-left, optional inline icon glyphs | kicker, headline (+`.accent`, +`.glyph`) | haze, day, sabbath, monday | b2 |
+| `milestone-stats` | Headline (accent phrase) + row of 3–4 big stat cards | kicker, headline, 3–4×{num, label, ctx} | haze, sabbath, monday | b2 |
+| `bar-chart` | Tall categorical bar chart (pure CSS, many categories) | kicker, headline, 6–14×{label, value, heightPct, dim} | sabbath, haze | b2 |
+| `bg-statement` | Full-bleed bg image + headline + 1–2 paragraphs | kicker, headline, 1–2 paras, image | haze, sabbath | b2 |
+| `feature-cards` | Dominant headline + lead + 3–4 titled cards on the bottom edge | headline, lead, 3–4×{title, desc} | sabbath, haze | b2 |
+| `segment-photos` | 3–4 photo segment cards w/ label + stat + desc overlaid | headline, 3–4×{image, title, num, desc} | sabbath, haze | b2 |
+| `two-up-cards` | Two big statement cards (Brief/Objective, Problem/Solution) | 2×{title, desc} | sabbath, haze, monday | b2 |
+| `numbered-cards` | 3–5 numbered principle/phase cards in a row | kicker, headline, lead, 3–5×{no, title?, desc} | sabbath, haze | b2 |
+| `strategy-columns` | Funnel matrix — header pill · desc box · tactic chips · base bar | kicker, headline, 3–5×{head, desc, items[]}, bar | sabbath, haze | b2 |
+| `converge-diagram` | Two source nodes → one dominant centre, dashed arrows in | headline, center, 2×{side} | sabbath, haze | b2 |
+| `venn-diagram` | Two overlapping circles + filled lens + bracket captions | headline, left{title,desc}, right{title,desc}, center, top, bottom | sabbath, haze | b2 |
+| `package-compare` | Two plans side by side (outline vs filled = recommended) | 2×{title, head, lines[], foot, recommended}, note | sabbath, haze | b2 |
+| `case-stack` | Case study — left title + right stacked metric cards | kicker, title, note, 2×{icon, head, ctx} top, 2–4×{head, lines[]} | haze, sabbath | b2 |
+| `closing-graphic` | Closing "let's talk" — headline left + graphic/icon right | headline, graphic, logo | haze, monday, sabbath | b2 |
 
 ## Theme rotation guidance
 

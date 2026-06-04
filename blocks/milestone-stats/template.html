@@ -1,0 +1,25 @@
+<!-- BLOCK: milestone-stats
+     PURPOSE: A headline claim (with a colour-accented lead phrase) sitting above a
+       row of 3-4 big filled stat cards. Use for "X years / N partners / first to ..."
+       milestone or credentials slides.
+     THEMES: theme-haze (default), theme-sabbath, theme-monday
+     SLOTS:
+       {kicker} optional eyebrow
+       {headline} wrap the lead phrase in <span class="accent"> to colour it
+       {cards} 3-4 × { num (big), label (bold lead-in, optional), ctx }
+     DENSITY: headline dominates the top ~45%; cards anchored along the bottom.
+       Each card: a big MD Nichrome number + short supporting line. NO empty box. -->
+<section class="slide theme-haze">
+  <div class="head">
+    <div class="kicker">Track record</div>
+    <h2 class="headline lg"><span class="accent">10 years</span> side by side<br>with Saudi Arabia</h2>
+  </div>
+  <div style="margin-top:auto;">
+    <div class="grid grid-4">
+      <div class="card card-monday feature"><div><div class="num" style="font-size:62px;">10<br>Years</div></div><p class="ctx" style="margin:0;">on the ground — 2 local offices and a growing Saudi team</p></div>
+      <div class="card card-monday feature"><div><div class="label">Trusted by</div><div class="num" style="font-size:74px;">300+</div></div><p class="ctx" style="margin:0;">organisers for 1,500+ events</p></div>
+      <div class="card card-monday feature"><div><div class="num" style="font-size:62px;">SAR<br>105 M+</div></div><p class="ctx" style="margin:0;">invested into the local market</p></div>
+      <div class="card card-monday feature"><div><div class="num" style="font-size:74px;">First</div></div><p class="ctx" style="margin:0;">to launch mobile ticketing &amp; ticket exchange in the GCC — starting in Saudi Arabia</p></div>
+    </div>
+  </div>
+</section>
